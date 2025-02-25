@@ -31,7 +31,7 @@
     muted
     playsinline
   >
-    <source src="/videos/6034698_Business_Traveling_1920x1080.mp4" type="video/mp4" />
+    <source src="./videos/6034698_Business_Traveling_1920x1080.mp4" type="video/mp4" />
   </video>
 
   <div class="container mx-auto px-4">
