@@ -1,0 +1,50 @@
+{
+  "en": {
+    "title": {
+      "line1": "Discover",
+      "line2": "Extraordinary",
+      "line3": "Experiences"
+    },
+    "description": "Let our AI concierge guide you through a world of exclusive offerings and bespoke adventures",
+    "buttons": {
+      "explore": "Explore Collections",
+      "contact": "Contact Concierge"
+    }
+  },
+  "fr": {
+    "title": {
+      "line1": "Découvrez",
+      "line2": "l'Extraordinaire",
+      "line3": "Expériences"
+    },
+    "description": "Laissez notre concierge IA vous guider à travers un monde d'offres exclusives et d'aventures sur mesure",
+    "buttons": {
+      "explore": "Explorer les Collections",
+      "contact": "Contacter le Concierge"
+    }
+  },
+  "zh": {
+    "title": {
+      "line1": "发现",
+      "line2": "非凡",
+      "line3": "体验"
+    },
+    "description": "让我们的AI管家带您探索独特优选和专属定制的奢华之旅",
+    "buttons": {
+      "explore": "探索系列",
+      "contact": "联系管家"
+    }
+  },
+  "ar": {
+    "title": {
+      "line1": "اكتشف",
+      "line2": "تجارب",
+      "line3": "استثنائية"
+    },
+    "description": "دع مساعدنا الذكي يرشدك عبر عالم من العروض الحصرية والمغامرات المخصصة",
+    "buttons": {
+      "explore": "استكشف المجموعات",
+      "contact": "تواصل مع المساعد"
+    }
+  }
+}

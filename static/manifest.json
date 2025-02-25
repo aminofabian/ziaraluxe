@@ -1,0 +1,27 @@
+{
+  "name": "Ziara Luxe",
+  "short_name": "Ziara",
+  "description": "Luxury travel experiences and personalized tours by Ziara Patil Hospitality",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#b05535",
+  "theme_color": "#b05535",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "apple touch icon"
+    }
+  ]
+}
