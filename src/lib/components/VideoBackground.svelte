@@ -15,7 +15,6 @@
     <source src={videoSrc} type="video/mp4" />
     Your browser does not support the video tag.
   </video>
-</div>
   <!-- Minimal overlay -->
   <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30"></div>
 </div>
