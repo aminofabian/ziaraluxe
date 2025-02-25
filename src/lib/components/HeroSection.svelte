@@ -25,7 +25,7 @@
 <div class="relative z-20 min-h-screen flex items-end pb-16 md:pb-32">
   <!-- Video Background -->
   <video
-    class="absolute inset-0 w-full h-full object-cover -z-10"
+    class="absolute inset-0 w-full h-full object-cover -z-12"
     autoplay
     loop
     muted
