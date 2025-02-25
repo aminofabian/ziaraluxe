@@ -2,7 +2,7 @@
   export let size = 40; // default size in pixels
 </script>
 
-<div class="logo-container inline-flex flex-col items-center">
+<div class="logo-container inline-flex flex-col items-center" style="transform: scale({size/40})">
   <!-- Main logo text -->
   <div class="logo-text-group flex items-baseline gap-6">
     <div class="english-text font-serif tracking-[0.25em] text-2xl uppercase">
