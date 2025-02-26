@@ -6,6 +6,8 @@
   let isLoaded = false;
   let hasError = false;
   let isPlaying = false;
+  let retryCount = 0;
+  const MAX_RETRIES = 3;
 
   onMount(() => {
     if (videoElement) {
@@ -27,10 +29,16 @@
         playVideo();
       };
 
-      // Handle video error
-      const handleError = (error) => {
+      // Handle video error with retry logic
+      const handleError = async (error) => {
         console.error('Video loading error:', error);
-        hasError = true;
+        if (retryCount < MAX_RETRIES) {
+          retryCount++;
+          console.log(`Retrying video load attempt ${retryCount} of ${MAX_RETRIES}`);
+          videoElement.load(); // Reload the video
+        } else {
+          hasError = true;
+        }
       };
 
       // Try to play video when it's ready
@@ -39,7 +47,7 @@
       
       // Handle visibility change
       document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible' && isLoaded && !hasError) {
+        if (document.visibilityState === 'visible' && isLoaded && !isPlaying) {
           playVideo();
         }
       });
@@ -48,32 +56,30 @@
       return () => {
         videoElement.removeEventListener('loadedmetadata', handleLoaded);
         videoElement.removeEventListener('error', handleError);
+        document.removeEventListener('visibilitychange', () => {});
       };
     }
   });
 </script>
 
 <div class="absolute inset-0 w-full h-full overflow-hidden">
-  {#if !hasError}
+  {#if hasError}
+    <div class="absolute inset-0 bg-black/50" />
+  {:else}
     <video
       bind:this={videoElement}
-      class="absolute top-0 left-0 w-full h-full object-cover"
-      autoplay
+      src={videoSrc}
+      class="absolute top-0 left-0 w-full h-full object-cover svelte-nve97m"
+      playsinline
       muted
       loop
-      playsinline
       preload="auto"
-      poster="/images/poster.jpg"
-      src={videoSrc}
-    >
-      <track kind="captions" />
-    </video>
-  {:else}
-    <!-- Fallback for video error -->
-    <div 
-      class="absolute top-0 left-0 w-full h-full bg-cover bg-center" 
-      style="background-image: url('/images/poster.jpg')"
-    ></div>
+    />
+    {#if !isLoaded}
+      <div class="absolute inset-0 bg-black/50 flex items-center justify-center">
+        <div class="w-8 h-8 border-4 border-white/30 border-t-white rounded-full animate-spin" />
+      </div>
+    {/if}
   {/if}
 </div>
 
