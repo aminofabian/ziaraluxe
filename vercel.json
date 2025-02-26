@@ -1,4 +1,23 @@
 {
+  "headers": [
+    {
+      "source": "/videos/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Content-Type",
+          "value": "video/mp4"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
   "framework": "sveltekit",
   "buildCommand": "npm ci && npm run build",
   "devCommand": "npm run dev",

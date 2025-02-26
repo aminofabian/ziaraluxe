@@ -2,19 +2,31 @@
   import { onMount } from 'svelte';
   
   export let videoSrc: string;
+  export let posterSrc: string = '/images/poster.jpg';
   let videoElement: HTMLVideoElement;
   let isLoaded = false;
   let hasError = false;
   let isPlaying = false;
   let retryCount = 0;
   const MAX_RETRIES = 3;
+  let isSafari = false;
+
+  // Ensure video source is properly resolved
+  $: resolvedVideoSrc = videoSrc.startsWith('http') ? videoSrc : `${window?.location?.origin || ''}${videoSrc}`;
 
   onMount(() => {
+    // Detect Safari browser
+    isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
     if (videoElement) {
       // Ensure video plays
       const playVideo = async () => {
         if (!isLoaded || hasError) return;
         try {
+          // Reset video if it's ended
+          if (videoElement.ended) {
+            videoElement.currentTime = 0;
+          }
           await videoElement.play();
           isPlaying = true;
         } catch (error) {
@@ -33,7 +45,7 @@
       const handleError = async (error) => {
         console.error('Video loading error:', {
           error,
-          videoSrc,
+          videoSrc: resolvedVideoSrc,
           networkState: videoElement.networkState,
           readyState: videoElement.readyState,
           currentSrc: videoElement.currentSrc,
@@ -45,7 +57,10 @@
 
         // Check if video source is accessible
         try {
-          const response = await fetch(videoSrc, { method: 'HEAD' });
+          const response = await fetch(resolvedVideoSrc, { 
+            method: 'HEAD',
+            credentials: 'same-origin'
+          });
           if (!response.ok) {
             console.error(`Video source not accessible: ${response.status} ${response.statusText}`);
             hasError = true;
@@ -60,28 +75,41 @@
         if (retryCount < MAX_RETRIES) {
           retryCount++;
           console.log(`Retrying video load attempt ${retryCount} of ${MAX_RETRIES}`);
-          videoElement.load(); // Reload the video
+          // Clear source and reload
+          videoElement.src = resolvedVideoSrc;
+          videoElement.load();
         } else {
           hasError = true;
+        }
+      };
+
+      // Handle video ended
+      const handleEnded = () => {
+        if (!hasError) {
+          videoElement.currentTime = 0;
+          playVideo();
         }
       };
 
       // Try to play video when it's ready
       videoElement.addEventListener('loadedmetadata', handleLoaded);
       videoElement.addEventListener('error', handleError);
+      videoElement.addEventListener('ended', handleEnded);
       
       // Handle visibility change
-      document.addEventListener('visibilitychange', () => {
+      const handleVisibilityChange = () => {
         if (document.visibilityState === 'visible' && isLoaded && !isPlaying) {
           playVideo();
         }
-      });
+      };
+      document.addEventListener('visibilitychange', handleVisibilityChange);
 
       // Cleanup
       return () => {
         videoElement.removeEventListener('loadedmetadata', handleLoaded);
         videoElement.removeEventListener('error', handleError);
-        document.removeEventListener('visibilitychange', () => {});
+        videoElement.removeEventListener('ended', handleEnded);
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
       };
     }
   });
@@ -93,12 +121,14 @@
   {:else}
     <video
       bind:this={videoElement}
-      src={videoSrc}
+      src={resolvedVideoSrc}
+      poster={posterSrc}
       class="absolute top-0 left-0 w-full h-full object-cover svelte-nve97m"
       playsinline
       muted
       loop
-      preload="auto"
+      preload={isSafari ? 'metadata' : 'auto'}
+      crossorigin="use-credentials"
     />
     {#if !isLoaded}
       <div class="absolute inset-0 bg-black/50 flex items-center justify-center">
