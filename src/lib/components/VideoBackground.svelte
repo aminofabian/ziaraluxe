@@ -2,14 +2,17 @@
   export let videoSrc: string;
   let isLoaded = false;
   let isError = false;
+
+  // Convert Streamable URL to embed format
+  $: embedUrl = videoSrc ? `https://streamable.com/e/${videoSrc.split('/').pop()}` : '';
 </script>
 
-<div class="fixed inset-0 w-screen h-screen overflow-hidden video-container z-[-1]">
-  {#if videoSrc}
+<div class="fixed inset-0 w-screen h-screen overflow-hidden video-container z-[-1] bg-black">
+  {#if embedUrl}
     <iframe
       title="Streamable video"
       class="absolute top-0 left-0 w-full h-full"
-      src={videoSrc}
+      src={embedUrl}
       frameborder="0"
       allowfullscreen
       allow="autoplay; fullscreen"
@@ -43,5 +46,7 @@
     left: 0 !important;
     z-index: -1 !important;
     border: none !important;
+    transform: scale(1.5) !important;
+    pointer-events: none !important;
   }
 </style>

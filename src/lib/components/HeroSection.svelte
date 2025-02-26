@@ -1,16 +1,16 @@
 <script lang="ts">
   import { currentLanguage, translations } from '$lib/stores/translations';
   import VideoBackground from './VideoBackground.svelte';
-
+  
   let aiMessage = '';
   let userInput = '';
   let isLoading = false;
   const aiName = "Aria";
   const aiRole = "Luxury Travel Concierge";
-
+  
   // Get translations based on current language
   $: content = translations[$currentLanguage]?.hero || translations.en.hero;
-
+  
   const handleAiInteraction = async () => {
     if (!userInput.trim()) return;
     
@@ -22,7 +22,7 @@
     userInput = '';
   };
 </script>
-
+  
 <div class="relative z-20 min-h-screen flex items-end pb-16 md:pb-30">
   <div class="container mx-auto px-4">
     <!-- Content grid -->
@@ -36,7 +36,7 @@
         <p class="text-lg sm:text-xl md:text-2xl xl:text-3xl mb-6 md:mb-12 text-white leading-relaxed max-w-2xl">
           Let our AI concierge guide you through a world of exclusive offerings and bespoke adventures
         </p>
-
+  
         <!-- CTA Buttons -->
         <div class="flex flex-col sm:flex-row items-stretch sm:items-start gap-4 md:gap-6">
           <a 
@@ -59,7 +59,7 @@
           </a>
         </div>
       </div>
-
+  
       <!-- Right side AI chat -->
       <div class="w-full">
         <!-- AI Agent Interface -->
@@ -104,7 +104,7 @@
               </div>
             {/if}
           </div>
-
+  
           <!-- Suggested Prompts -->
           {#if !aiMessage}
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3 mb-4 md:mb-6">
@@ -118,7 +118,7 @@
               {/each}
             </div>
           {/if}
-
+  
           <div class="flex gap-2">
             <input
               type="text"
