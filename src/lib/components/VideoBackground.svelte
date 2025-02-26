@@ -16,7 +16,7 @@
   });
 </script>
 
-<div class="fixed inset-0 w-screen h-screen overflow-hidden video-container z-[-1]">
+<div class="fixed inset-0 w-screen h-screen overflow-hidden video-container">
   {#if !isError && streamableUrl}
     <iframe
       title="Streamable video"
@@ -41,7 +41,7 @@
     />
   {/if}
   {#if !isLoaded || isError}
-    <div class="absolute inset-0 z-10 bg-black/50 flex items-center justify-center">
+    <div class="absolute inset-0 flex items-center justify-center bg-black/50">
       {#if isError}
         <div class="text-white text-center p-4">
           <p class="text-xl mb-2">Video unavailable</p>
@@ -57,14 +57,18 @@
 </div>
 
 <style>
-  :global(.video-container video),
+  /* Target both direct and iframe-contained videos */
+  :global(.video-container),
   :global(.video-container iframe) {
-    width: 100vw !important;
-    height: 100vh !important;
-    object-fit: cover !important;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    z-index: -1 !important;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  :global(.video-container iframe) {
+    object-fit: cover;
+    z-index: -1;
   }
 </style>
