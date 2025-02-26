@@ -84,6 +84,13 @@
     console.log('Video can play through without buffering');
     isLoading = false;
   }
+
+  function handleLoadedData() {
+    console.log('Video data loaded:', videoSrc);
+    if (videoElement && !isPlaying) {
+      videoElement.play().catch(handleError);
+    }
+  }
 </script>
 
 <div class="absolute inset-0 w-full h-full overflow-hidden -z-10">
