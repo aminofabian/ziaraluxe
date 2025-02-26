@@ -16,7 +16,7 @@
   });
 </script>
 
-<div class="absolute inset-0 w-full h-full overflow-hidden video-container">
+<div class="fixed inset-0 w-screen h-screen overflow-hidden video-container z-[-1]">
   {#if !isError && streamableUrl}
     <iframe
       title="Streamable video"
@@ -59,11 +59,12 @@
 <style>
   :global(.video-container video),
   :global(.video-container iframe) {
-    width: 100% !important;
-    height: 100% !important;
+    width: 100vw !important;
+    height: 100vh !important;
     object-fit: cover !important;
-    position: absolute !important;
+    position: fixed !important;
     top: 0 !important;
     left: 0 !important;
+    z-index: -1 !important;
   }
 </style>
