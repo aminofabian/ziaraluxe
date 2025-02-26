@@ -23,7 +23,7 @@
   };
 </script>
   
-<div class="relative z-20 min-h-screen flex items-end pb-16 md:pb-30">
+<div class="relative z-20 min-h-screen flex items-end pb-16 md:pb-32">
   <div class="container mx-auto px-4">
     <!-- Content grid -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 items-end">
