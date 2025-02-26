@@ -10,11 +10,7 @@
     "sourceMap": true,
     "strict": true,
     "module": "es2022",
-    "moduleResolution": "bundler",
-    "paths": {
-      "$lib": ["./src/lib"],
-      "$lib/*": ["./src/lib/*"]
-    }
+    "moduleResolution": "bundler"
   },
   "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"]
 }

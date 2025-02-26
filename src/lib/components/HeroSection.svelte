@@ -23,17 +23,7 @@
 </script>
 
 <div class="relative z-20 min-h-screen flex items-end pb-16 md:pb-32">
-  <!-- Video Background -->
-  <video
-    class="absolute inset-0 w-full h-full object-cover -z-10"
-    autoplay
-    loop
-    muted
-    playsinline
-    preload="auto"
-  >
-    <source src="videos/6034698_Business_Traveling_1920x1080.mp4" type="video/mp4" />
-  </video>
+  <VideoBackground videoSrc="videos/6034698_Business_Traveling_1920x1080.mp4" />
 
   <div class="container mx-auto px-4">
     <!-- Content grid -->
