@@ -3,23 +3,35 @@
   let isLoaded = false;
   let isError = false;
 
-  // Convert Streamable URL to embed format
-  $: embedUrl = videoSrc ? `https://streamable.com/e/${videoSrc.split('/').pop()}` : '';
+  // Convert Streamable URL to embed URL
+  $: embedUrl = videoSrc.includes('streamable.com')
+    ? `https://streamable.com/e/${videoSrc.split('/').pop()}?autoplay=1&muted=1`
+    : videoSrc;
+
+  // Handle iframe load success
+  const handleLoadSuccess = () => {
+    isLoaded = true;
+    isError = false;
+  };
+
+  // Handle iframe load error
+  const handleLoadError = () => {
+    isError = true;
+    isLoaded = false;
+  };
 </script>
 
 <div class="fixed inset-0 w-screen h-screen overflow-hidden video-container z-[-1] bg-black">
-  {#if embedUrl}
-    <iframe
-      title="Streamable video"
-      class="absolute top-0 left-0 w-full h-full"
-      src={embedUrl}
-      frameborder="0"
-      allowfullscreen
-      allow="autoplay; fullscreen"
-      on:load={() => isLoaded = true}
-      on:error={() => isError = true}
-    />
-  {/if}
+  <iframe
+    src={embedUrl}
+    class="absolute top-0 left-0 w-full h-full object-cover"
+    frameborder="0"
+    allowfullscreen
+    on:load={handleLoadSuccess}
+    on:error={handleLoadError}
+    title="Background Video"
+  ></iframe>
+
   {#if !isLoaded || isError}
     <div class="absolute inset-0 z-10 bg-black/50 flex items-center justify-center">
       {#if isError}
@@ -37,7 +49,7 @@
 </div>
 
 <style>
-  :global(.video-container iframe) {
+  video {
     width: 100vw !important;
     height: 100vh !important;
     object-fit: cover !important;
@@ -45,7 +57,6 @@
     top: 0 !important;
     left: 0 !important;
     z-index: -1 !important;
-    border: none !important;
     transform: scale(1.5) !important;
     pointer-events: none !important;
   }
