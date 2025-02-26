@@ -131,8 +131,4 @@
       transform: translateY(5px) scale(1.1);
     }
   }
-
-  :global([dir="rtl"]) .text-gradient {
-    direction: ltr;
-  }
 </style>

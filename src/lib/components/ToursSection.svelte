@@ -151,8 +151,4 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
   }
-
-  .floating {
-    animation: float 3s ease-in-out infinite;
-  }
 </style>
