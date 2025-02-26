@@ -15,21 +15,19 @@
   import WhatsAppChat from '$lib/components/WhatsAppChat.svelte';
 </script>
 
-<div class="relative min-h-screen pt-[72px]">
-  <!-- Video Background -->
-  <VideoBackground videoSrc="https://streamable.com/q8y4b1" />
-  
-  <!-- Overlay gradient -->
-  <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20 z-10"></div>
-
+<div class="relative min-h-screen">
   <!-- Hello Bar -->
   <HelloBar />
 
   <!-- Navbar -->
   <Navbar />
 
-  <!-- Hero Section -->
-  <HeroSection />
+  <!-- Hero Section with Video Background -->
+  <div class="relative h-screen">
+    <VideoBackground videoSrc="https://streamable.com/e/q8y4b1" />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20 z-10"></div>
+    <HeroSection />
+  </div>
 </div>
 
 <!-- Main Content Sections -->

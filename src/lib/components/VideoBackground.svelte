@@ -23,14 +23,17 @@
   };
 </script>
 
-<div class="fixed inset-0 w-screen h-screen overflow-hidden pointer-events-none">
+<div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
   <div class="relative w-full h-full">
     <iframe
+      bind:this={iframeElement}
       title="Background Video"
-      src={videoSrc}
+      src={embedUrl}
       frameborder="0"
       class="absolute inset-0 w-full h-full object-cover scale-150"
-      allow="autoplay"
+      allow="autoplay; fullscreen"
+      on:load={handleLoadSuccess}
+      on:error={handleLoadError}
     />
   </div>
 </div>
