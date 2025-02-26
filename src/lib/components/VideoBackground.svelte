@@ -10,33 +10,40 @@
   let retryCount = 0;
   const MAX_RETRIES = 3;
   let isSafari = false;
-
   let resolvedVideoSrc = videoSrc;
 
-  // Ensure video source is properly resolved
-  const resolveVideoSrc = () => {
-    // Handle both development and production environments
-    if (videoSrc.startsWith('http')) {
-      resolvedVideoSrc = videoSrc;
-    } else {
-      // Ensure the path starts with a forward slash and is relative to base URL
-      const normalizedPath = videoSrc.startsWith('/') ? videoSrc : `/${videoSrc}`;
-      // Get the base URL without any trailing slashes
-      const baseUrl = import.meta.env.BASE_URL.replace(/\/*$/, '');
-      // Construct the full URL ensuring no double dots or slashes
-      const origin = window.location.origin.replace(/\/*$/, '');
-      resolvedVideoSrc = `${origin}${baseUrl}${normalizedPath}`;
-    }
-  };
+  function resolveVideoSrc() {
+    // Ensure videoSrc starts with a forward slash
+    resolvedVideoSrc = videoSrc.startsWith('/') ? videoSrc : `/${videoSrc}`;
+  }
 
-  onMount(() => {
+  onMount(async () => {
     // Resolve video source on client side
     resolveVideoSrc();
     
     // Detect Safari browser
     isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
+    // Check if video file exists before attempting to play
+    try {
+      const response = await fetch(resolvedVideoSrc, { method: 'HEAD' });
+      if (!response.ok) {
+        console.error('Video file not found:', resolvedVideoSrc);
+        hasError = true;
+        return;
+      }
+    } catch (error) {
+      console.error('Error checking video file:', error);
+      hasError = true;
+      return;
+    }
+
     if (videoElement) {
+      // Set video element properties
+      videoElement.muted = true;
+      videoElement.playsInline = true;
+      videoElement.load(); // Force reload of video element
+      
       // Ensure video plays
       const playVideo = async () => {
         if (!isLoaded || hasError) return;
@@ -55,6 +62,7 @@
 
       // Handle video loaded
       const handleLoaded = () => {
+        console.log('Video loaded successfully');
         isLoaded = true;
         playVideo();
       };
@@ -70,13 +78,15 @@
           error: videoElement.error ? {
             code: videoElement.error.code,
             message: videoElement.error.message
-          } : null
+          } : null,
+          userAgent: navigator.userAgent
         });
 
         // Check if video source is accessible
         try {
           const response = await fetch(resolvedVideoSrc, { 
             method: 'HEAD',
+            cache: 'no-cache',
             credentials: 'same-origin'
           });
           if (!response.ok) {
@@ -84,6 +94,7 @@
             hasError = true;
             return;
           }
+          console.log('Video source is accessible:', response.status);
         } catch (fetchError) {
           console.error('Network error while checking video source:', fetchError);
           hasError = true;
@@ -94,6 +105,8 @@
           retryCount++;
           console.log(`Retrying video load attempt ${retryCount} of ${MAX_RETRIES}`);
           // Clear source and reload
+          videoElement.src = '';
+          videoElement.load();
           videoElement.src = resolvedVideoSrc;
           videoElement.load();
         } else {
@@ -145,8 +158,16 @@
       playsinline
       muted
       loop
-      preload={isSafari ? 'metadata' : 'auto'}
+      preload="auto"
       crossorigin="anonymous"
+      on:loadeddata={() => {
+        console.log('Video data loaded');
+        isLoaded = true;
+      }}
+      on:canplay={() => {
+        console.log('Video can play');
+        playVideo();
+      }}
     />
     {#if !isLoaded}
       <div class="absolute inset-0 bg-black/50 flex items-center justify-center">
