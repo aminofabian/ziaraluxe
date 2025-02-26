@@ -193,7 +193,7 @@
       }}
     />
     {#if !isLoaded}
-      <div class="absolute inset-0 bg-gradient-to-b from-black/2 via-transparent to-black/5 z-10"></div>
+      <div class="absolute inset-0 z-10"></div>
     {/if}
   {/if}
 </div>
@@ -204,6 +204,8 @@
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000;
-    filter: brightness(1) saturate(1);
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
   }
 </style>
