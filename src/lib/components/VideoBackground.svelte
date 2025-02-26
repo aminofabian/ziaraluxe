@@ -11,22 +11,31 @@
   const MAX_RETRIES = 3;
   let isSafari = false;
   let resolvedVideoSrc = videoSrc;
+  let isStreamable = false;
+  let streamableId = '';
 
   function resolveVideoSrc() {
-    // Check if the video source is an external URL
+    // Check if the video source is a Streamable URL
+    const streamableRegex = /streamable\.com\/([a-zA-Z0-9]+)/;
+    const streamableMatch = videoSrc.match(streamableRegex);
+    
+    if (streamableMatch) {
+      isStreamable = true;
+      streamableId = streamableMatch[1];
+      return;
+    }
+
+    // Handle other video sources
     const isExternalUrl = videoSrc.startsWith('http://') || videoSrc.startsWith('https://');
-    // If it's an external URL, use it directly; otherwise, treat it as a local file
     resolvedVideoSrc = isExternalUrl ? videoSrc : (videoSrc.startsWith('/') ? videoSrc : `/${videoSrc}`);
   }
 
   async function playVideo() {
-    if (!isLoaded || hasError) return;
+    if (!isLoaded || hasError || isStreamable) return;
     try {
-      // Reset video if it's ended
       if (videoElement.ended) {
         videoElement.currentTime = 0;
       }
-      // Add user interaction check
       const playPromise = videoElement.play();
       if (playPromise !== undefined) {
         await playPromise;
@@ -35,12 +44,10 @@
       }
     } catch (error) {
       console.error('Video autoplay failed:', error);
-      // Only set hasError if it's not an autoplay restriction
       if (error.name !== 'NotAllowedError') {
         hasError = true;
       } else {
         console.log('Autoplay restricted - waiting for user interaction');
-        // Add event listener for user interaction
         const handleUserInteraction = () => {
           playVideo();
           document.removeEventListener('click', handleUserInteraction);
@@ -53,26 +60,26 @@
   }
 
   onMount(() => {
-    // Resolve video source on client side
     resolveVideoSrc();
     
-    // Detect Safari browser
+    if (isStreamable) {
+      isLoaded = true;
+      return;
+    }
+
     isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
     if (videoElement) {
-      // Set video element properties
       videoElement.muted = true;
       videoElement.playsInline = true;
-      videoElement.load(); // Force reload of video element
+      videoElement.load();
 
-      // Handle video loaded
       const handleLoaded = () => {
         console.log('Video loaded successfully');
         isLoaded = true;
         playVideo();
       };
 
-      // Handle video error with retry logic
       const handleError = async (error) => {
         console.error('Video loading error:', {
           error,
@@ -87,7 +94,6 @@
           userAgent: navigator.userAgent
         });
 
-        // Check if video source is accessible with proper headers
         try {
           const response = await fetch(resolvedVideoSrc, { 
             method: 'HEAD',
@@ -113,7 +119,6 @@
         if (retryCount < MAX_RETRIES) {
           retryCount++;
           console.log(`Retrying video load attempt ${retryCount} of ${MAX_RETRIES}`);
-          // Clear source and reload
           videoElement.src = '';
           videoElement.load();
           videoElement.src = resolvedVideoSrc;
@@ -123,7 +128,6 @@
         }
       };
 
-      // Handle video ended
       const handleEnded = () => {
         if (!hasError) {
           videoElement.currentTime = 0;
@@ -131,12 +135,10 @@
         }
       };
 
-      // Try to play video when it's ready
       videoElement.addEventListener('loadedmetadata', handleLoaded);
       videoElement.addEventListener('error', handleError);
       videoElement.addEventListener('ended', handleEnded);
       
-      // Handle visibility change
       const handleVisibilityChange = () => {
         if (document.visibilityState === 'visible' && isLoaded && !isPlaying) {
           playVideo();
@@ -144,7 +146,6 @@
       };
       document.addEventListener('visibilitychange', handleVisibilityChange);
 
-      // Cleanup
       return () => {
         videoElement.removeEventListener('loadedmetadata', handleLoaded);
         videoElement.removeEventListener('error', handleError);
@@ -158,6 +159,15 @@
 <div class="absolute inset-0 w-full h-full overflow-hidden">
   {#if hasError}
     <div class="absolute inset-0 bg-black/50" />
+  {:else if isStreamable}
+    <iframe
+      title="Streamable video"
+      class="absolute top-0 left-0 w-full h-full"
+      src={`https://streamable.com/e/${streamableId}?autoplay=1&muted=1`}
+      frameborder="0"
+      allowfullscreen
+      allow="autoplay"
+    ></iframe>
   {:else}
     <video
       bind:this={videoElement}
