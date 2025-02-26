@@ -4,15 +4,21 @@
   export let videoSrc: string;
   let videoElement: HTMLVideoElement;
   let isLoaded = false;
+  let hasError = false;
+  let isPlaying = false;
 
   onMount(() => {
     if (videoElement) {
       // Ensure video plays
-      const playVideo = () => {
-        if (!isLoaded) return;
-        videoElement.play().catch(error => {
-          console.log('Video autoplay failed:', error);
-        });
+      const playVideo = async () => {
+        if (!isLoaded || hasError) return;
+        try {
+          await videoElement.play();
+          isPlaying = true;
+        } catch (error) {
+          console.error('Video autoplay failed:', error);
+          hasError = true;
+        }
       };
 
       // Handle video loaded
@@ -21,12 +27,19 @@
         playVideo();
       };
 
+      // Handle video error
+      const handleError = (error) => {
+        console.error('Video loading error:', error);
+        hasError = true;
+      };
+
       // Try to play video when it's ready
       videoElement.addEventListener('loadedmetadata', handleLoaded);
+      videoElement.addEventListener('error', handleError);
       
       // Handle visibility change
       document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible' && isLoaded) {
+        if (document.visibilityState === 'visible' && isLoaded && !hasError) {
           playVideo();
         }
       });
@@ -34,30 +47,34 @@
       // Cleanup
       return () => {
         videoElement.removeEventListener('loadedmetadata', handleLoaded);
+        videoElement.removeEventListener('error', handleError);
       };
     }
   });
 </script>
 
 <div class="absolute inset-0 w-full h-full overflow-hidden">
-  <video
-    bind:this={videoElement}
-    class="absolute top-0 left-0 w-full h-full object-cover"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="auto"
-    poster="/images/poster.jpg"
-  >
-    <source 
-      src={videoSrc} 
-      type="video/mp4"
-    />
-    Your browser does not support the video tag.
-  </video>
-  <!-- Minimal overlay -->
-  <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30"></div>
+  {#if !hasError}
+    <video
+      bind:this={videoElement}
+      class="absolute top-0 left-0 w-full h-full object-cover"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      poster="/images/poster.jpg"
+      src={videoSrc}
+    >
+      <track kind="captions" />
+    </video>
+  {:else}
+    <!-- Fallback for video error -->
+    <div 
+      class="absolute top-0 left-0 w-full h-full bg-cover bg-center" 
+      style="background-image: url('/images/poster.jpg')"
+    ></div>
+  {/if}
 </div>
 
 <style>
