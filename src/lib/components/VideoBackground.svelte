@@ -13,8 +13,10 @@
   let resolvedVideoSrc = videoSrc;
 
   function resolveVideoSrc() {
-    // In both development and production, videos are served from the static directory
-    resolvedVideoSrc = videoSrc.startsWith('/') ? videoSrc : `/${videoSrc}`;
+    // Check if the video source is an external URL
+    const isExternalUrl = videoSrc.startsWith('http://') || videoSrc.startsWith('https://');
+    // If it's an external URL, use it directly; otherwise, treat it as a local file
+    resolvedVideoSrc = isExternalUrl ? videoSrc : (videoSrc.startsWith('/') ? videoSrc : `/${videoSrc}`);
   }
 
   async function playVideo() {
