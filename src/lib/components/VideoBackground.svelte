@@ -27,7 +27,14 @@
 
     // Handle other video sources
     const isExternalUrl = videoSrc.startsWith('http://') || videoSrc.startsWith('https://');
-    resolvedVideoSrc = isExternalUrl ? videoSrc : (videoSrc.startsWith('/') ? videoSrc : `/${videoSrc}`);
+    if (isExternalUrl) {
+      resolvedVideoSrc = videoSrc;
+    } else {
+      // Ensure proper path resolution for static assets
+      const basePath = import.meta.env.BASE_URL || '';
+      const normalizedPath = videoSrc.startsWith('/') ? videoSrc.slice(1) : videoSrc;
+      resolvedVideoSrc = `${basePath}${normalizedPath}`;
+    }
   }
 
   async function playVideo() {
@@ -36,6 +43,17 @@
       if (videoElement.ended) {
         videoElement.currentTime = 0;
       }
+      await new Promise((resolve) => {
+        const loadedHandler = () => {
+          videoElement.removeEventListener('loadeddata', loadedHandler);
+          resolve();
+        };
+        if (videoElement.readyState >= 3) {
+          resolve();
+        } else {
+          videoElement.addEventListener('loadeddata', loadedHandler);
+        }
+      });
       const playPromise = videoElement.play();
       if (playPromise !== undefined) {
         await playPromise;
