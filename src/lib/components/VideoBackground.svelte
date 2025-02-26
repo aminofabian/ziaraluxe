@@ -1,43 +1,20 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  
   export let videoSrc: string;
   let isLoaded = false;
   let isError = false;
-  let streamableUrl: string;
-
-  onMount(() => {
-    if (!videoSrc) {
-      isError = true;
-      return;
-    }
-
-    streamableUrl = videoSrc;
-  });
 </script>
 
 <div class="fixed inset-0 w-screen h-screen overflow-hidden video-container z-[-1]">
-  {#if !isError && streamableUrl}
+  {#if videoSrc}
     <iframe
       title="Streamable video"
       class="absolute top-0 left-0 w-full h-full"
-      src={streamableUrl}
+      src={videoSrc}
       frameborder="0"
       allowfullscreen
-      allow="autoplay"
+      allow="autoplay; fullscreen"
+      on:load={() => isLoaded = true}
       on:error={() => isError = true}
-      on:load={(e) => {
-        try {
-          const iframeDoc = e.target.contentDocument || e.target.contentWindow.document;
-          if (iframeDoc.title.includes('Oops') || iframeDoc.body.textContent.includes('find your video')) {
-            isError = true;
-          }
-        } catch (err) {
-          // Cannot access iframe content due to same-origin policy
-          // This is expected and we can ignore this error
-        }
-        isLoaded = true;
-      }}
     />
   {/if}
   {#if !isLoaded || isError}
@@ -57,7 +34,6 @@
 </div>
 
 <style>
-  :global(.video-container video),
   :global(.video-container iframe) {
     width: 100vw !important;
     height: 100vh !important;
@@ -66,5 +42,6 @@
     top: 0 !important;
     left: 0 !important;
     z-index: -1 !important;
+    border: none !important;
   }
 </style>
