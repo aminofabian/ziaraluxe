@@ -31,7 +31,32 @@
 
       // Handle video error with retry logic
       const handleError = async (error) => {
-        console.error('Video loading error:', error);
+        console.error('Video loading error:', {
+          error,
+          videoSrc,
+          networkState: videoElement.networkState,
+          readyState: videoElement.readyState,
+          currentSrc: videoElement.currentSrc,
+          error: videoElement.error ? {
+            code: videoElement.error.code,
+            message: videoElement.error.message
+          } : null
+        });
+
+        // Check if video source is accessible
+        try {
+          const response = await fetch(videoSrc, { method: 'HEAD' });
+          if (!response.ok) {
+            console.error(`Video source not accessible: ${response.status} ${response.statusText}`);
+            hasError = true;
+            return;
+          }
+        } catch (fetchError) {
+          console.error('Network error while checking video source:', fetchError);
+          hasError = true;
+          return;
+        }
+
         if (retryCount < MAX_RETRIES) {
           retryCount++;
           console.log(`Retrying video load attempt ${retryCount} of ${MAX_RETRIES}`);
