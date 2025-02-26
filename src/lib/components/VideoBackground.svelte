@@ -36,6 +36,7 @@
           console.error('Video playback failed:', error);
           isError = true;
         });
+      }
       
       video.addEventListener('error', (e) => {
         console.error('Video loading error:', e.target.error);
@@ -95,6 +96,13 @@
             // Cannot access iframe content due to same-origin policy
             // This is expected and we can ignore this error
           }
+          // Set a timeout to check if the video is actually loaded
+          setTimeout(() => {
+            const iframe = e.target;
+            if (iframe.contentWindow && !iframe.contentWindow.document.querySelector('video')) {
+              isError = true;
+            }
+          }, 2000);
           isLoaded = true;
         }}
       />
