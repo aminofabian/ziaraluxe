@@ -13,8 +13,24 @@
   let resolvedVideoSrc = videoSrc;
 
   function resolveVideoSrc() {
-    // Ensure videoSrc starts with a forward slash
-    resolvedVideoSrc = videoSrc.startsWith('/') ? videoSrc : `/${videoSrc}`;
+    // Ensure videoSrc starts with a forward slash and handle base URL for production
+    const baseUrl = import.meta.env.PROD ? 'https://ziaraluxe.vercel.app' : '';
+    resolvedVideoSrc = videoSrc.startsWith('/') ? `${baseUrl}${videoSrc}` : `${baseUrl}/${videoSrc}`;
+  }
+
+  async function playVideo() {
+    if (!isLoaded || hasError) return;
+    try {
+      // Reset video if it's ended
+      if (videoElement.ended) {
+        videoElement.currentTime = 0;
+      }
+      await videoElement.play();
+      isPlaying = true;
+    } catch (error) {
+      console.error('Video autoplay failed:', error);
+      hasError = true;
+    }
   }
 
   onMount(async () => {
@@ -43,22 +59,6 @@
       videoElement.muted = true;
       videoElement.playsInline = true;
       videoElement.load(); // Force reload of video element
-      
-      // Ensure video plays
-      const playVideo = async () => {
-        if (!isLoaded || hasError) return;
-        try {
-          // Reset video if it's ended
-          if (videoElement.ended) {
-            videoElement.currentTime = 0;
-          }
-          await videoElement.play();
-          isPlaying = true;
-        } catch (error) {
-          console.error('Video autoplay failed:', error);
-          hasError = true;
-        }
-      };
 
       // Handle video loaded
       const handleLoaded = () => {
@@ -82,12 +82,16 @@
           userAgent: navigator.userAgent
         });
 
-        // Check if video source is accessible
+        // Check if video source is accessible with proper headers
         try {
           const response = await fetch(resolvedVideoSrc, { 
             method: 'HEAD',
             cache: 'no-cache',
-            credentials: 'same-origin'
+            credentials: 'same-origin',
+            headers: {
+              'Accept': 'video/mp4,video/webm,video/*;q=0.9,*/*;q=0.8',
+              'Range': 'bytes=0-0'
+            }
           });
           if (!response.ok) {
             console.error(`Video source not accessible: ${response.status} ${response.statusText}`);
