@@ -15,8 +15,6 @@
   function resolveVideoSrc() {
     // In both development and production, videos are served from the static directory
     resolvedVideoSrc = videoSrc.startsWith('/') ? videoSrc : `/${videoSrc}`;
-    // Add cache-busting parameter to prevent caching issues
-    resolvedVideoSrc = `${resolvedVideoSrc}?v=${Date.now()}`
   }
 
   async function playVideo() {
