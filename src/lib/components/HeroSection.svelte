@@ -40,7 +40,7 @@
         <div class="flex flex-col sm:flex-row items-stretch sm:items-start gap-4 md:gap-6">
           <a 
             href="/collections" 
-            class="btn-primary px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-medium bg-[#5c6b26] hover:bg-[#5c6b26]/90 text-white transform hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2 rounded-xl shadow-lg"
+            class="btn-primary px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-medium bg-[#9c5738] hover:bg-[#9c5738]/90 text-white transform hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2 rounded-xl shadow-lg"
           >
             <span>Explore Collections</span>
             <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
