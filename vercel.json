@@ -3,20 +3,5 @@
   "buildCommand": "npm ci && npm run build",
   "devCommand": "npm run dev",
   "installCommand": "npm ci",
-  "version": 2,
-  "headers": [
-    {
-      "source": "/videos/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        },
-        {
-          "key": "Accept-Ranges",
-          "value": "bytes"
-        }
-      ]
-    }
-  ]
+  "version": 2
 }
