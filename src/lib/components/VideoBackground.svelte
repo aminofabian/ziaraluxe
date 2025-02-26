@@ -13,9 +13,10 @@
   let resolvedVideoSrc = videoSrc;
 
   function resolveVideoSrc() {
-    // Ensure videoSrc starts with a forward slash and handle base URL for production
-    const baseUrl = import.meta.env.PROD ? 'https://ziaraluxe.vercel.app' : '';
-    resolvedVideoSrc = videoSrc.startsWith('/') ? `${baseUrl}${videoSrc}` : `${baseUrl}/${videoSrc}`;
+    // In both development and production, videos are served from the static directory
+    resolvedVideoSrc = videoSrc.startsWith('/') ? videoSrc : `/${videoSrc}`;
+    // Add cache-busting parameter to prevent caching issues
+    resolvedVideoSrc = `${resolvedVideoSrc}?v=${Date.now()}`
   }
 
   async function playVideo() {
