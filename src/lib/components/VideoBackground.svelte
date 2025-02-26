@@ -11,10 +11,17 @@
   const MAX_RETRIES = 3;
   let isSafari = false;
 
+  let resolvedVideoSrc = videoSrc;
+
   // Ensure video source is properly resolved
-  $: resolvedVideoSrc = videoSrc.startsWith('http') ? videoSrc : `${window?.location?.origin || ''}${videoSrc}`;
+  const resolveVideoSrc = () => {
+    resolvedVideoSrc = videoSrc.startsWith('http') ? videoSrc : `${window.location.origin}${videoSrc}`;
+  };
 
   onMount(() => {
+    // Resolve video source on client side
+    resolveVideoSrc();
+    
     // Detect Safari browser
     isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
