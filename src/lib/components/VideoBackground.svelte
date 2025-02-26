@@ -13,8 +13,9 @@
     }
 
     if (videoSrc.includes('streamable.com')) {
-      // For Streamable URLs, use the video directly
-      return videoSrc;
+      // Extract video ID from Streamable URL and format it correctly
+      const videoId = videoSrc.split('/').pop();
+      return `https://streamable.com/e/${videoId}`;
     } else {
       // For local videos, create a video element
       const video = document.createElement('video');
@@ -26,9 +27,13 @@
       video.poster = posterSrc;
       video.className = 'absolute top-0 left-0 w-full h-full object-cover';
       
-      video.onerror = () => {
+      video.addEventListener('error', () => {
         isError = true;
-      };
+      });
+
+      video.addEventListener('loadeddata', () => {
+        isLoaded = true;
+      });
 
       return video;
     }
@@ -42,7 +47,6 @@
       const container = document.querySelector('.video-container');
       container?.appendChild(videoElement);
     }
-    isLoaded = true;
   });
 </script>
 
@@ -67,6 +71,7 @@
             // Cannot access iframe content due to same-origin policy
             // This is expected and we can ignore this error
           }
+          isLoaded = true;
         }}
       />
     {/if}
@@ -88,9 +93,13 @@
 </div>
 
 <style>
-  iframe {
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
+  :global(.video-container video),
+  :global(.video-container iframe) {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
   }
 </style>

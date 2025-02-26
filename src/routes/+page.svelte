@@ -17,10 +17,11 @@
 
 <div class="relative min-h-screen pt-[72px]">
   <!-- Video Background -->
-  <VideoBackground videoSrc="https://streamable.com/q8y4b1" />
+  <VideoBackground videoSrc="/videos/6034698_Business_Traveling_1920x1080.mp4" />
   
   <!-- Overlay gradient -->
-  
+  <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20 z-10"></div>
+
   <!-- Hello Bar -->
   <HelloBar />
 
@@ -41,8 +42,7 @@
 <NewsletterSection />
 <InstagramSection />
 <Footer />
-
-<WhatsAppChat phoneNumber="+1234567890" welcomeMessage="Hello! How can we help you plan your perfect tour?" />
+<WhatsAppChat />
 
 <style>
   :global(body) {
