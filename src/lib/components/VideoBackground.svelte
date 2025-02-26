@@ -21,9 +21,11 @@
     } else {
       // Ensure the path starts with a forward slash and is relative to base URL
       const normalizedPath = videoSrc.startsWith('/') ? videoSrc : `/${videoSrc}`;
-      // Use import.meta.env.BASE_URL for proper path resolution in both dev and prod
-      const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
-      resolvedVideoSrc = `${window.location.origin}${baseUrl}${normalizedPath}`;
+      // Get the base URL without any trailing slashes
+      const baseUrl = import.meta.env.BASE_URL.replace(/\/*$/, '');
+      // Construct the full URL ensuring no double dots or slashes
+      const origin = window.location.origin.replace(/\/*$/, '');
+      resolvedVideoSrc = `${origin}${baseUrl}${normalizedPath}`;
     }
   };
 
