@@ -159,7 +159,7 @@
   {:else}
     <video
       bind:this={videoElement}
-      {poster}
+      poster={posterSrc}
       class="absolute top-0 left-0 w-full h-full object-cover svelte-nve97m"
       playsinline
       muted
