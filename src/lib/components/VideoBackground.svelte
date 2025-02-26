@@ -2,73 +2,228 @@
   import { onMount } from 'svelte';
   
   export let videoSrc: string;
+  export let posterSrc: string = '/images/poster.jpg';
+  let videoElement: HTMLVideoElement;
   let isLoaded = false;
-  let isError = false;
-  let streamableUrl: string;
+  let hasError = false;
+  let isPlaying = false;
+  let retryCount = 0;
+  const MAX_RETRIES = 3;
+  let isSafari = false;
+  let resolvedVideoSrc = videoSrc;
+  let isStreamable = false;
+  let streamableId = '';
 
-  onMount(() => {
-    if (!videoSrc) {
-      isError = true;
+  function resolveVideoSrc() {
+    // Check if the video source is a Streamable URL
+    const streamableRegex = /streamable\.com\/([a-zA-Z0-9]+)/;
+    const streamableMatch = videoSrc.match(streamableRegex);
+    
+    if (streamableMatch) {
+      isStreamable = true;
+      streamableId = streamableMatch[1];
       return;
     }
 
-    streamableUrl = videoSrc;
+    // Handle other video sources
+    const isExternalUrl = videoSrc.startsWith('http://') || videoSrc.startsWith('https://');
+    if (isExternalUrl) {
+      resolvedVideoSrc = videoSrc;
+    } else {
+      // Ensure proper path resolution for static assets
+      const basePath = import.meta.env.BASE_URL || '';
+      const normalizedPath = videoSrc.startsWith('/') ? videoSrc.slice(1) : videoSrc;
+      resolvedVideoSrc = `${basePath}${normalizedPath}`;
+    }
+  }
+
+  async function playVideo() {
+    if (!isLoaded || hasError || isStreamable) return;
+    try {
+      if (videoElement.ended) {
+        videoElement.currentTime = 0;
+      }
+      await new Promise((resolve) => {
+        const loadedHandler = () => {
+          videoElement.removeEventListener('loadeddata', loadedHandler);
+          resolve();
+        };
+        if (videoElement.readyState >= 3) {
+          resolve();
+        } else {
+          videoElement.addEventListener('loadeddata', loadedHandler);
+        }
+      });
+      const playPromise = videoElement.play();
+      if (playPromise !== undefined) {
+        await playPromise;
+        isPlaying = true;
+        console.log('Video playing successfully');
+      }
+    } catch (error) {
+      console.error('Video autoplay failed:', error);
+      if (error.name !== 'NotAllowedError') {
+        hasError = true;
+      } else {
+        console.log('Autoplay restricted - waiting for user interaction');
+        const handleUserInteraction = () => {
+          playVideo();
+          document.removeEventListener('click', handleUserInteraction);
+          document.removeEventListener('touchstart', handleUserInteraction);
+        };
+        document.addEventListener('click', handleUserInteraction);
+        document.addEventListener('touchstart', handleUserInteraction);
+      }
+    }
+  }
+
+  onMount(() => {
+    resolveVideoSrc();
+    
+    if (isStreamable) {
+      isLoaded = true;
+      return;
+    }
+
+    isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    if (videoElement) {
+      videoElement.muted = true;
+      videoElement.playsInline = true;
+      videoElement.load();
+
+      const handleLoaded = () => {
+        console.log('Video loaded successfully');
+        isLoaded = true;
+        playVideo();
+      };
+
+      const handleError = async (error) => {
+        console.error('Video loading error:', {
+          error,
+          videoSrc: resolvedVideoSrc,
+          networkState: videoElement.networkState,
+          readyState: videoElement.readyState,
+          currentSrc: videoElement.currentSrc,
+          error: videoElement.error ? {
+            code: videoElement.error.code,
+            message: videoElement.error.message
+          } : null,
+          userAgent: navigator.userAgent
+        });
+
+        try {
+          const response = await fetch(resolvedVideoSrc, { 
+            method: 'HEAD',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+              'Accept': 'video/mp4,video/webm,video/*;q=0.9,*/*;q=0.8',
+              'Range': 'bytes=0-0'
+            }
+          });
+          if (!response.ok) {
+            console.error(`Video source not accessible: ${response.status} ${response.statusText}`);
+            hasError = true;
+            return;
+          }
+          console.log('Video source is accessible:', response.status);
+        } catch (fetchError) {
+          console.error('Network error while checking video source:', fetchError);
+          hasError = true;
+          return;
+        }
+
+        if (retryCount < MAX_RETRIES) {
+          retryCount++;
+          console.log(`Retrying video load attempt ${retryCount} of ${MAX_RETRIES}`);
+          videoElement.src = '';
+          videoElement.load();
+          videoElement.src = resolvedVideoSrc;
+          videoElement.load();
+        } else {
+          hasError = true;
+        }
+      };
+
+      const handleEnded = () => {
+        if (!hasError) {
+          videoElement.currentTime = 0;
+          playVideo();
+        }
+      };
+
+      videoElement.addEventListener('loadedmetadata', handleLoaded);
+      videoElement.addEventListener('error', handleError);
+      videoElement.addEventListener('ended', handleEnded);
+      
+      const handleVisibilityChange = () => {
+        if (document.visibilityState === 'visible' && isLoaded && !isPlaying) {
+          playVideo();
+        }
+      };
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+
+      return () => {
+        videoElement.removeEventListener('loadedmetadata', handleLoaded);
+        videoElement.removeEventListener('error', handleError);
+        videoElement.removeEventListener('ended', handleEnded);
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
+      };
+    }
   });
 </script>
 
-<div class="fixed inset-0 w-screen h-screen overflow-hidden video-container">
-  {#if !isError && streamableUrl}
+<div class="absolute inset-0 w-full h-full overflow-hidden">
+  {#if hasError}
+    <div class="absolute inset-0 bg-black" />
+  {:else if isStreamable}
     <iframe
       title="Streamable video"
       class="absolute top-0 left-0 w-full h-full"
-      src={streamableUrl}
+      src={`https://streamable.com/e/${streamableId}?autoplay=1&muted=1`}
       frameborder="0"
       allowfullscreen
       allow="autoplay"
-      on:error={() => isError = true}
-      on:load={(e) => {
-        try {
-          const iframeDoc = e.target.contentDocument || e.target.contentWindow.document;
-          if (iframeDoc.title.includes('Oops') || iframeDoc.body.textContent.includes('find your video')) {
-            isError = true;
-          }
-        } catch (err) {
-          // Cannot access iframe content due to same-origin policy
-          // This is expected and we can ignore this error
-        }
+    ></iframe>
+  {:else}
+    <video
+      bind:this={videoElement}
+      src={resolvedVideoSrc}
+      poster={posterSrc}
+      class="absolute top-0 left-0 w-full h-full object-cover"
+      playsinline
+      muted
+      loop
+      preload="auto"
+      on:loadeddata={() => {
+        console.log('Video data loaded');
         isLoaded = true;
+        playVideo();
+      }}
+      on:playing={() => {
+        console.log('Video is now playing');
+        isPlaying = true;
+      }}
+      on:error={() => {
+        console.error('Video error occurred');
+        hasError = true;
       }}
     />
-  {/if}
-  {#if !isLoaded || isError}
-    <div class="absolute inset-0 flex items-center justify-center bg-black/50">
-      {#if isError}
-        <div class="text-white text-center p-4">
-          <p class="text-xl mb-2">Video unavailable</p>
-          <p class="text-sm opacity-75">The requested video could not be loaded</p>
-        </div>
-      {:else}
-        <div class="animate-pulse">
-          <div class="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
-        </div>
-      {/if}
-    </div>
+    {#if !isLoaded}
+      <div class="absolute inset-0 z-10"></div>
+    {/if}
   {/if}
 </div>
 
 <style>
-  /* Target both direct and iframe-contained videos */
-  :global(.video-container),
-  :global(.video-container iframe) {
+  video {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
     width: 100vw;
     height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
-  
-  :global(.video-container iframe) {
     object-fit: cover;
-    z-index: -1;
   }
 </style>
