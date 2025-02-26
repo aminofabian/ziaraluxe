@@ -15,7 +15,14 @@
 
   // Ensure video source is properly resolved
   const resolveVideoSrc = () => {
-    resolvedVideoSrc = videoSrc.startsWith('http') ? videoSrc : `${window.location.origin}${videoSrc}`;
+    // Handle both development and production environments
+    if (videoSrc.startsWith('http')) {
+      resolvedVideoSrc = videoSrc;
+    } else {
+      // In production, ensure the path starts with a forward slash
+      const normalizedPath = videoSrc.startsWith('/') ? videoSrc : `/${videoSrc}`;
+      resolvedVideoSrc = `${window.location.origin}${normalizedPath}`;
+    }
   };
 
   onMount(() => {
@@ -135,7 +142,7 @@
       muted
       loop
       preload={isSafari ? 'metadata' : 'auto'}
-      crossorigin="use-credentials"
+      crossorigin="anonymous"
     />
     {#if !isLoaded}
       <div class="absolute inset-0 bg-black/50 flex items-center justify-center">
