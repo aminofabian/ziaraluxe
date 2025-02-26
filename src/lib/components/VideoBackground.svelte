@@ -2,10 +2,11 @@
   export let videoSrc: string;
   let isLoaded = false;
   let isError = false;
+  let iframeElement: HTMLIFrameElement;
 
-  // Convert Streamable URL to embed URL
+  // Convert Streamable URL to embed URL with proper format
   $: embedUrl = videoSrc.includes('streamable.com')
-    ? `https://streamable.com/e/${videoSrc.split('/').pop()}?autoplay=1&muted=1`
+    ? `https://streamable.com/e/${videoSrc.split('/').pop()}?autoplay=1&muted=1&loop=1&background=1`
     : videoSrc;
 
   // Handle iframe load success
@@ -18,14 +19,17 @@
   const handleLoadError = () => {
     isError = true;
     isLoaded = false;
+    console.error('Video loading error:', embedUrl);
   };
 </script>
 
 <div class="fixed inset-0 w-screen h-screen overflow-hidden video-container z-[-1] bg-black">
   <iframe
+    bind:this={iframeElement}
     src={embedUrl}
     class="absolute top-0 left-0 w-full h-full object-cover"
     frameborder="0"
+    allow="autoplay; fullscreen"
     allowfullscreen
     on:load={handleLoadSuccess}
     on:error={handleLoadError}
@@ -37,7 +41,7 @@
       {#if isError}
         <div class="text-white text-center p-4">
           <p class="text-xl mb-2">Video unavailable</p>
-          <p class="text-sm opacity-75">The requested video could not be loaded</p>
+          <p class="text-sm opacity-75">Please check the video URL and try again</p>
         </div>
       {:else}
         <div class="animate-pulse">
@@ -49,15 +53,9 @@
 </div>
 
 <style>
-  video {
+  :global(.video-container iframe) {
     width: 100vw !important;
     height: 100vh !important;
-    object-fit: cover !important;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    z-index: -1 !important;
-    transform: scale(1.5) !important;
-    pointer-events: none !important;
+    pointer-events: none;
   }
 </style>
