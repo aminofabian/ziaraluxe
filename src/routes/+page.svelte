@@ -17,10 +17,8 @@
 
 <div class="relative min-h-screen pt-[72px]">
   <!-- Video Background -->
-  <VideoBackground videoSrc="https://streamable.com/q8y4b1" />
+  <VideoBackground videoSrc="/videos/6034698_Business_Traveling_1920x1080.mp4" />
   
-
-
   <!-- Hello Bar -->
   <HelloBar />
 

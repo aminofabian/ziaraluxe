@@ -173,7 +173,7 @@
       bind:this={videoElement}
       src={resolvedVideoSrc}
       poster={posterSrc}
-      class="absolute top-0 left-0 w-full h-full object-cover svelte-nve97m"
+      class="absolute top-0 left-0 w-full h-full object-cover"
       playsinline
       muted
       loop
