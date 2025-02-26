@@ -15,7 +15,8 @@
     if (videoSrc.includes('streamable.com')) {
       // Extract video ID from Streamable URL and format it correctly
       const videoId = videoSrc.split('/').pop();
-      return `https://streamable.com/e/${videoId}`;
+      // Use Streamable's player API with autoplay and muted parameters
+      return `https://streamable.com/e/${videoId}?autoplay=1&muted=1`;
     } else {
       // For local videos, create a video element
       const video = document.createElement('video');
@@ -27,12 +28,35 @@
       video.poster = posterSrc;
       video.className = 'absolute top-0 left-0 w-full h-full object-cover';
       
-      video.addEventListener('error', () => {
+      // Force video to play after loading
+      video.load();
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.error('Video playback failed:', error);
+          isError = true;
+        });
+      
+      video.addEventListener('error', (e) => {
+        console.error('Video loading error:', e.target.error);
         isError = true;
       });
 
       video.addEventListener('loadeddata', () => {
         isLoaded = true;
+        // Try to play the video again after it's loaded
+        video.play().catch(error => {
+          console.error('Video playback failed after load:', error);
+          isError = true;
+        });
+      });
+
+      video.addEventListener('canplaythrough', () => {
+        isLoaded = true;
+        video.play().catch(error => {
+          console.error('Video playback failed on canplaythrough:', error);
+          isError = true;
+        });
       });
 
       return video;
