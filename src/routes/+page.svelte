@@ -17,7 +17,7 @@
 
 <div class="relative min-h-screen pt-[72px]">
   <!-- Video Background -->
-  <VideoBackground videoSrc="videos/6034698_Business_Traveling_1920x1080.mp4" />
+  <VideoBackground videoSrc="/videos/6034698_Business_Traveling_1920x1080.mp4" />
   
   <!-- Overlay gradient -->
   <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20 z-10"></div>
