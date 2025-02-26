@@ -24,11 +24,29 @@
       if (videoElement.ended) {
         videoElement.currentTime = 0;
       }
-      await videoElement.play();
-      isPlaying = true;
+      // Add user interaction check
+      const playPromise = videoElement.play();
+      if (playPromise !== undefined) {
+        await playPromise;
+        isPlaying = true;
+        console.log('Video playing successfully');
+      }
     } catch (error) {
       console.error('Video autoplay failed:', error);
-      hasError = true;
+      // Only set hasError if it's not an autoplay restriction
+      if (error.name !== 'NotAllowedError') {
+        hasError = true;
+      } else {
+        console.log('Autoplay restricted - waiting for user interaction');
+        // Add event listener for user interaction
+        const handleUserInteraction = () => {
+          playVideo();
+          document.removeEventListener('click', handleUserInteraction);
+          document.removeEventListener('touchstart', handleUserInteraction);
+        };
+        document.addEventListener('click', handleUserInteraction);
+        document.addEventListener('touchstart', handleUserInteraction);
+      }
     }
   }
 
@@ -166,10 +184,22 @@
       on:loadeddata={() => {
         console.log('Video data loaded');
         isLoaded = true;
+        // Try to play immediately when data is loaded
+        playVideo();
       }}
       on:canplay={() => {
         console.log('Video can play');
-        playVideo();
+        if (!isPlaying) {
+          playVideo();
+        }
+      }}
+      on:playing={() => {
+        console.log('Video is now playing');
+        isPlaying = true;
+      }}
+      on:pause={() => {
+        console.log('Video paused');
+        isPlaying = false;
       }}
     />
     {#if !isLoaded}
