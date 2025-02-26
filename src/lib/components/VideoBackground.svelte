@@ -6,24 +6,45 @@
   let isPlaying = false;
   let loadAttempts = 0;
   const MAX_ATTEMPTS = 3;
+  const BUFFER_CHECK_INTERVAL = 1000; // 1 second
+  let bufferCheckTimer: ReturnType<typeof setInterval>;
 
-  function handleLoadedData() {
-    isLoading = false;
-    loadAttempts = 0;
-    videoElement.play()
-      .then(() => {
-        console.log('Video started playing successfully:', videoSrc);
-      })
-      .catch((error) => {
-        console.error('Error playing video:', error);
-        handleError(error);
-      });
+  function checkBuffer() {
+    if (!videoElement || !isPlaying) return;
+    
+    const buffered = videoElement.buffered;
+    if (buffered.length > 0) {
+      const currentBuffered = buffered.end(buffered.length - 1);
+      const duration = videoElement.duration;
+      const bufferedPercentage = (currentBuffered / duration) * 100;
+      
+      if (bufferedPercentage < 15) { // If less than 15% is buffered
+        console.warn('Low buffer, pausing to rebuild buffer');
+        videoElement.pause();
+        setTimeout(() => {
+          if (videoElement && !isPlaying) {
+            videoElement.play().catch(handleError);
+          }
+        }, 2000);
+      }
+    }
+  }
+
+  function startBufferCheck() {
+    bufferCheckTimer = setInterval(checkBuffer, BUFFER_CHECK_INTERVAL);
+  }
+
+  function stopBufferCheck() {
+    if (bufferCheckTimer) {
+      clearInterval(bufferCheckTimer);
+    }
   }
 
   function handlePlaying() {
     isLoading = false;
     isPlaying = true;
     console.log('Video is now playing:', videoSrc);
+    startBufferCheck();
   }
 
   function handleError(error?: any) {
@@ -31,6 +52,7 @@
     isLoading = false;
     hasError = true;
     isPlaying = false;
+    stopBufferCheck();
 
     if (loadAttempts < MAX_ATTEMPTS) {
       loadAttempts++;
@@ -87,7 +109,7 @@
     loop
     muted
     playsinline
-    preload="auto"
+    preload="metadata"
     poster="/images/poster.jpg"
     on:loadstart={handleLoadStart}
     on:loadeddata={handleLoadedData}
