@@ -193,9 +193,7 @@
       }}
     />
     {#if !isLoaded}
-      <div class="absolute inset-0 bg-black/50 flex items-center justify-center">
-        <div class="w-8 h-8 border-4 border-white/30 border-t-white rounded-full animate-spin" />
-      </div>
+      <div class="absolute inset-0 bg-gradient-to-b from-black/2 via-transparent to-black/5 z-10"></div>
     {/if}
   {/if}
 </div>
@@ -206,6 +204,6 @@
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000;
-    filter: brightness(0.9) saturate(1.1);
+    filter: brightness(1) saturate(1);
   }
 </style>
