@@ -1,5 +1,6 @@
 <script lang="ts">
   import { currentLanguage, translations } from '$lib/stores/translations';
+  import VideoBackground from './VideoBackground.svelte';
 
   let aiMessage = '';
   let userInput = '';
