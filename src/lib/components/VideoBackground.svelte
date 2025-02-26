@@ -159,27 +159,17 @@
   {:else}
     <video
       bind:this={videoElement}
+      src={resolvedVideoSrc}
       poster={posterSrc}
       class="absolute top-0 left-0 w-full h-full object-cover svelte-nve97m"
       playsinline
       muted
       loop
-      preload="metadata"
-      on:loadedmetadata={() => {
-        console.log('Video metadata loaded');
-        videoElement.src = resolvedVideoSrc;
-        videoElement.load();
-      }}
+      preload="auto"
       on:loadeddata={() => {
         console.log('Video data loaded');
         isLoaded = true;
         playVideo();
-      }}
-      on:canplay={() => {
-        console.log('Video can play');
-        if (!isPlaying && !hasError) {
-          playVideo();
-        }
       }}
       on:playing={() => {
         console.log('Video is now playing');
