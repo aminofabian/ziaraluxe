@@ -50,26 +50,12 @@
     }
   }
 
-  onMount(async () => {
+  onMount(() => {
     // Resolve video source on client side
     resolveVideoSrc();
     
     // Detect Safari browser
     isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-    // Check if video file exists before attempting to play
-    try {
-      const response = await fetch(resolvedVideoSrc, { method: 'HEAD' });
-      if (!response.ok) {
-        console.error('Video file not found:', resolvedVideoSrc);
-        hasError = true;
-        return;
-      }
-    } catch (error) {
-      console.error('Error checking video file:', error);
-      hasError = true;
-      return;
-    }
 
     if (videoElement) {
       // Set video element properties
@@ -173,23 +159,25 @@
   {:else}
     <video
       bind:this={videoElement}
-      src={resolvedVideoSrc}
-      poster={posterSrc}
+      {poster}
       class="absolute top-0 left-0 w-full h-full object-cover svelte-nve97m"
       playsinline
       muted
       loop
-      preload="auto"
-      crossorigin="anonymous"
+      preload="metadata"
+      on:loadedmetadata={() => {
+        console.log('Video metadata loaded');
+        videoElement.src = resolvedVideoSrc;
+        videoElement.load();
+      }}
       on:loadeddata={() => {
         console.log('Video data loaded');
         isLoaded = true;
-        // Try to play immediately when data is loaded
         playVideo();
       }}
       on:canplay={() => {
         console.log('Video can play');
-        if (!isPlaying) {
+        if (!isPlaying && !hasError) {
           playVideo();
         }
       }}
@@ -197,9 +185,9 @@
         console.log('Video is now playing');
         isPlaying = true;
       }}
-      on:pause={() => {
-        console.log('Video paused');
-        isPlaying = false;
+      on:error={() => {
+        console.error('Video error occurred');
+        hasError = true;
       }}
     />
     {#if !isLoaded}
