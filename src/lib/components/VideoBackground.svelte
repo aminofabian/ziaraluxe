@@ -19,9 +19,11 @@
     if (videoSrc.startsWith('http')) {
       resolvedVideoSrc = videoSrc;
     } else {
-      // In production, ensure the path starts with a forward slash
+      // Ensure the path starts with a forward slash and is relative to base URL
       const normalizedPath = videoSrc.startsWith('/') ? videoSrc : `/${videoSrc}`;
-      resolvedVideoSrc = `${window.location.origin}${normalizedPath}`;
+      // Use import.meta.env.BASE_URL for proper path resolution in both dev and prod
+      const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
+      resolvedVideoSrc = `${window.location.origin}${baseUrl}${normalizedPath}`;
     }
   };
 
