@@ -19,8 +19,7 @@
   <!-- Video Background -->
   <VideoBackground videoSrc="https://streamable.com/q8y4b1" />
   
-  <!-- Overlay gradient -->
-  <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20 z-10"></div>
+
 
   <!-- Hello Bar -->
   <HelloBar />

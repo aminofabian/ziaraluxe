@@ -158,7 +158,7 @@
 
 <div class="absolute inset-0 w-full h-full overflow-hidden">
   {#if hasError}
-    <div class="absolute inset-0 bg-black/50" />
+    <div class="absolute inset-0 bg-black" />
   {:else if isStreamable}
     <iframe
       title="Streamable video"
