@@ -69,7 +69,7 @@
 
 <section class="py-20 bg-white">
   <div class="container mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-4">TRAVEL PACKAGES</h2>
+    <h2 class="text-4xl font-bold text-center mb-4 text-[#e3a457]">TRAVEL PACKAGES</h2>
     <p class="text-xl text-center text-gray-600 mb-12">
       We tailor every journey to align with purpose, passion, and positive impact.
     </p>
