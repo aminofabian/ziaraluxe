@@ -27,7 +27,7 @@
   ];
 </script>
 
-<section class="py-24 relative bg-white">
+<section class="py-24 relative bg-slate-100">
   <!-- Decorative elements -->
   <div class="absolute inset-0 overflow-hidden">
     <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
