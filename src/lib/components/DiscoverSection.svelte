@@ -2,33 +2,38 @@
   const destinations = [
     {
       id: 1,
-      title: "Greece Getaways",
-      image: "/images/tips/destinations/athens-315833_1920.jpg",
-      description: "Ancient wonders and Mediterranean charm"
+      title: "Conscious Travel Kenya",
+      image: "/images/discoversection/WhatsApp Image 2025-02-27 at 15.22.48_363e2bc8.jpg",
+      description: "Community impact and wildlife conservation",
+      slug: "kenya-conscious"
     },
     {
       id: 2,
-      title: "Island Paradise",
-      image: "/images/tips/destinations/boat-7767575_1920.jpg",
-      description: "Crystal waters and pristine beaches"
+      title: "Dutch Craft Beer Experience",
+      image: "/images/discoversection/WhatsApp Image 2025-02-27 at 15.22.48_5062c640.jpg",
+      description: "Business networking in brewery culture",
+      slug: "netherlands-brewery"
     },
     {
       id: 3,
-      title: "Mountain Escapes",
-      image: "/images/tips/destinations/camping-7947055_1920.jpg",
-      description: "Adventure in nature's grandeur"
+      title: "AgTech Egypt & Israel",
+      image: "/images/discoversection/WhatsApp Image 2025-02-27 at 15.29.23_62167d14.jpg",
+      description: "Innovation in desert agriculture",
+      slug: "egypt-israel-agtech"
     },
     {
       id: 4,
-      title: "French Romance",
-      image: "/images/tips/destinations/france-7370939_1920.jpg",
-      description: "Culture, cuisine, and timeless elegance"
+      title: "Creative France",
+      image: "/images/discoversection/WhatsApp Image 2025-02-27 at 15.29.25_5909dd99.jpg",
+      description: "Art, cinema, and design exploration",
+      slug: "creative-industry-france"
     },
     {
       id: 5,
-      title: "Desert Dreams",
-      image: "/images/tips/destinations/women-5534478_1920.jpg",
-      description: "Mystical journeys through golden sands"
+      title: "Tanzania Impact Journey",
+      image: "/images/discoversection/WhatsApp Image 2025-02-27 at 15.29.25_f01dcd61.jpg",
+      description: "Education and community development",
+      slug: "tanzania-conscious"
     }
   ];
 </script>
@@ -44,7 +49,10 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {#each destinations as destination (destination.id)}
-        <div class="group relative aspect-[4/3] overflow-hidden rounded-2xl cursor-pointer">
+        <a 
+          href="/itineraries/{destination.slug}" 
+          class="group relative aspect-[4/3] overflow-hidden rounded-2xl cursor-pointer block"
+        >
           <!-- Background Image -->
           <img 
             src={destination.image} 
@@ -65,7 +73,7 @@
 
           <!-- Hover Effect Border -->
           <div class="absolute inset-0 border-2 border-white/0 group-hover:border-white/20 rounded-2xl transition-colors duration-300"></div>
-        </div>
+        </a>
       {/each}
     </div>
   </div>

@@ -6,7 +6,7 @@
   let userInput = '';
   let isLoading = false;
   const aiName = "Aria";
-  const aiRole = "Luxury Travel & Business Concierge";
+  const aiRole = "Luxury Travel Concierge";
   
   // Add type assertion to ensure currentLanguage is a valid key
   $: content = translations[$currentLanguage as keyof typeof translations]?.hero || translations.en.hero;
@@ -17,7 +17,7 @@
     isLoading = true;
     // Simulate AI response
     await new Promise(resolve => setTimeout(resolve, 1000));
-    aiMessage = `I'd be delighted to help you create a transformative journey that aligns with your goals, whether it's for business expansion, purpose-driven travel, or specialized group experiences. How may I assist you today?`;
+    aiMessage = `I'd be happy to help you discover luxury experiences tailored to your preferences. Would you like to explore our curated collections or plan a personalized experience?`;
     isLoading = false;
     userInput = '';
   };
@@ -30,21 +30,21 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 items-end">
       <div class="text-left backdrop-blur-sm bg-black/5 p-4 md:p-8 rounded-xl">
         <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl xl:text-7xl mb-4 md:mb-6 leading-tight">
-          <span class="block text-white">Redefining Travel</span>
-          <span class="block text-[#e3a457] font-bold mt-1 md:mt-2">Through Purpose</span>
-          <span class="block text-white mt-1 md:mt-2">& Impact</span>
+          <span class="block text-white">Discover</span>
+          <span class="block text-[#e3a457] font-bold mt-1 md:mt-2">Extraordinary</span>
+          <span class="block text-white mt-1 md:mt-2">Experiences</span>
         </h1>
         <p class="text-lg sm:text-xl md:text-2xl xl:text-3xl mb-6 md:mb-12 text-white leading-relaxed max-w-2xl">
-          Curating transformative journeys that blend luxury, knowledge, and connection.
-        </p>
+          At Ziara Luxe, every destination tells a story and Every journey has a
+purpose.        </p>
   
         <!-- CTA Buttons -->
         <div class="flex flex-col sm:flex-row items-stretch sm:items-start gap-4 md:gap-6">
           <a 
-            href="/collections" 
+            href="/itineraries" 
             class="btn-primary px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-medium bg-[#b05535] hover:bg-[#b05535]/90 text-white transform hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2 rounded-xl shadow-lg"
           >
-            <span>Explore Collections</span>
+            <span>Explore Our itineraries</span>
             <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -109,12 +109,7 @@
           <!-- Suggested Prompts -->
           {#if !aiMessage}
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3 mb-4 md:mb-6">
-              {#each [
-                'Plan an executive business immersion',
-                'Explore purpose-driven tourism',
-                'Organize a wellness retreat',
-                'Discover industry benchmarking tours'
-              ] as prompt}
+              {#each ['Plan a luxury Iceland adventure', 'Find exclusive resorts in Dubai', 'Organize a private yacht tour', 'Book a helicopter transfer'] as prompt}
                 <button 
                   on:click={() => { userInput = prompt; handleAiInteraction(); }}
                   class="text-left p-2 md:p-3 bg-white/5 hover:bg-white/10 transition-all duration-300 transform hover:scale-102 text-sm md:text-lg text-white rounded"

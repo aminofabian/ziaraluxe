@@ -3,37 +3,37 @@
 
   export let features = [
     {
-      image: '/images/tips/8F7A1154-2-scaled.jpg',
+      image: '/images/featuresection/business-5475283_1280.jpg',
       icon: '🚀',
       title: 'Entrepreneurs & Business Owners',
       description: 'Looking to expand into new markets, meet potential partners, and gain insights into global industries.',
     },
     {
-      image: '/images/tips/alex-azabache-hz4tKDvQHoo-unsplash-scaled.jpg',
+      image: '/images/featuresection/photo-1549403666-683c34342d9c.avif',
       icon: '👔',
       title: 'Corporate Executives & Decision Makers',
       description: 'Seeking industry-specific benchmarking, strategic collaborations, and leadership insights.',
     },
     {
-      image: '/images/tips/hisham-zayadnh-hP9QlSnyX1A-unsplash-scaled.jpg',
+      image: '/images/featuresection/photo-1497215728101-856f4ea42174.avif',
       icon: '📈',
       title: 'Investors & Venture Capitalists',
       description: 'Exploring high-value business ventures, start-up ecosystems, and emerging industries worldwide.',
     },
     {
-      image: '/images/tips/daniele-colucci-MchEBdctI24-unsplash-scaled.jpg',
+      image: '/images/featuresection/building-4884852_640.jpg',
       icon: '⚖️',
       title: 'Policymakers & Government Officials',
       description: 'Studying economic models, trade policies, and regulatory frameworks from leading nations.',
     },
     {
-      image: '/images/tips/8F7A1511.jpg',
+      image: '/images/featuresection/photo-1431540015161-0bf868a2d407.avif',
       icon: '🔬',
       title: 'Industry Experts & Researchers',
       description: 'Gaining hands-on experience in specialized fields, from healthcare innovations to agricultural advancements.',
     },
     {
-      image: '/images/tips/130644843.jpg',
+      image: '/images/featuresection/ai-generated-8715094_640.jpg',
       icon: '🤝',
       title: 'Business Councils & Trade Associations',
       description: 'Organizing exclusive industry missions, sector-based learning tours, and cross-border networking.',
@@ -41,12 +41,12 @@
   ];
 
   const floatingImages = [
-    '/images/tips/8F7A1154-2-scaled.jpg',
-    '/images/tips/8F7A1511.jpg',
-    '/images/tips/130644843.jpg',
-    '/images/tips/alex-azabache-hz4tKDvQHoo-unsplash-scaled.jpg',
-    '/images/tips/daniele-colucci-MchEBdctI24-unsplash-scaled.jpg',
-    '/images/tips/DSC04814.jpg'
+    '/images/featuresection/business-5475283_1280.jpg',
+    '/images/featuresection/photo-1549403666-683c34342d9c.avif',
+    '/images/featuresection/photo-1497215728101-856f4ea42174.avif',
+    '/images/featuresection/road-trip-437413_640.jpg',
+    '/images/featuresection/station-7946105_1280.jpg',
+    '/images/featuresection/building-4884852_640.jpg'
   ];
 
   let isVisible = false;
@@ -126,7 +126,7 @@
         <div class="aspect-square rounded-full overflow-hidden border-[12px] border-white shadow-xl relative">
           <div class="absolute inset-0 bg-[#b05535]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <img
-            src="/images/tips/8F7A1154-2-scaled.jpg"
+            src="/images/featuresection/business-5475283_1280.jpg"
             alt="Luxurious travel experience"
             class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
           />

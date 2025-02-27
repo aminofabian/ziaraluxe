@@ -1,5 +1,14 @@
 {
 	"/": [],
+	"/itineraries": [],
+	"/itineraries/creative-industry-france": [],
+	"/itineraries/creative-industry-germany": [],
+	"/itineraries/egypt-israel-agtech": [],
+	"/itineraries/healing-horizons": [],
+	"/itineraries/kenya-conscious": [],
+	"/itineraries/netherlands-business": [],
+	"/itineraries/singapore-corporate": [],
+	"/itineraries/tanzania-conscious": [],
 	"/itineraries/[slug]": [
 		"src/routes/itineraries/[slug]/+page.server.ts"
 	]

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
 
   let currentIndex = 0;
@@ -22,7 +22,7 @@
     images.slice(i * 4, (i * 4) + 4)
   );
 
-  let autoplayInterval;
+  let autoplayInterval: ReturnType<typeof setInterval> | undefined;
 
   onMount(() => {
     startAutoplay();

@@ -1,15 +1,14 @@
-import type { PageServerLoad } from './$types';
-
-export const load: PageServerLoad = async ({ params }) => {
-  // This would typically fetch data from your database based on the slug
+<script lang="ts">
+  import TravelItinerary from '$lib/components/TravelItinerary.svelte';
+  
   const itineraryData = {
     title: "Healing Horizons Retreat - Franschhoek, South Africa",
-    startDate: "March 15, 2024",
-    endDate: "March 20, 2024",
+    startDate: "April 1, 2024",
+    endDate: "April 6, 2024",
     days: [
       {
         dayOfWeek: "Day One",
-        date: "March 15, 2024",
+        date: "April 1, 2024",
         location: "Cape Town & Franschhoek",
         activities: [
           {
@@ -30,13 +29,13 @@ export const load: PageServerLoad = async ({ params }) => {
           },
           {
             time: "19:00 PM",
-            description: "Evening: Dinner at the hotel restaurant, The Olive Tree, offering farm-to-table South African cuisine (e.g., grilled fish, vegetable stew, malva pudding). Customizable for dietary needs."
+            description: "Evening: Dinner at the hotel restaurant, The Olive Tree, offering farm-to-table South African cuisine (e.g., grilled fish, vegetable stew, malva pudding). Customizable for dietary needs. Healing Focus: A gentle start to ease into the retreat and build trust among participants."
           }
         ]
       },
       {
         dayOfWeek: "Day Two",
-        date: "March 16, 2024",
+        date: "April 2, 2024",
         location: "Mont Rochelle Nature Reserve",
         activities: [
           {
@@ -57,13 +56,13 @@ export const load: PageServerLoad = async ({ params }) => {
           },
           {
             time: "19:00 PM",
-            description: "Evening: Dinner at Foliage, a cozy, accessible eatery (e.g., bobotie, roasted veggies, melktert)."
+            description: "Evening: Dinner at Foliage, a cozy, accessible eatery (e.g., bobotie, roasted veggies, melktert). Healing Focus: Nature's calm soothes physical and emotional strain, encouraging mindfulness."
           }
         ]
       },
       {
         dayOfWeek: "Day Three",
-        date: "March 17, 2024",
+        date: "April 3, 2024",
         location: "Franschhoek Village",
         activities: [
           {
@@ -84,13 +83,13 @@ export const load: PageServerLoad = async ({ params }) => {
           },
           {
             time: "19:00 PM",
-            description: "Evening: Dinner at Le Bon Vivant, offering refined yet accessible dining (e.g., lamb shank, sweet potato mash, panna cotta)."
+            description: "Evening: Dinner at Le Bon Vivant, offering refined yet accessible dining (e.g., lamb shank, sweet potato mash, panna cotta). Healing Focus: Creative expression aids emotional release and fosters group connection."
           }
         ]
       },
       {
         dayOfWeek: "Day Four",
-        date: "March 18, 2024",
+        date: "April 4, 2024",
         location: "Franschhoek Village",
         activities: [
           {
@@ -111,13 +110,13 @@ export const load: PageServerLoad = async ({ params }) => {
           },
           {
             time: "19:00 PM",
-            description: "Evening: Dinner at Reuben's, an accessible fine-dining spot (e.g., Cape Malay curry, roasted vegetables, chocolate fondant)."
+            description: "Evening: Dinner at Reuben's, an accessible fine-dining spot (e.g., Cape Malay curry, roasted vegetables, chocolate fondant). Healing Focus: Shared history and storytelling strengthen community ties."
           }
         ]
       },
       {
         dayOfWeek: "Day Five",
-        date: "March 19, 2024",
+        date: "April 5, 2024",
         location: "Camelot Spa",
         activities: [
           {
@@ -138,13 +137,13 @@ export const load: PageServerLoad = async ({ params }) => {
           },
           {
             time: "19:00 PM",
-            description: "Evening: Farewell dinner at La Petite Colombe, a celebrated accessible restaurant (e.g., beef fillet, creamy polenta, peppermint crisp tart). A fire pit gathering follows for storytelling or quiet reflection."
+            description: "Evening: Farewell dinner at La Petite Colombe, a celebrated accessible restaurant (e.g., beef fillet, creamy polenta, peppermint crisp tart). A fire pit gathering follows for storytelling or quiet reflection. Healing Focus: Physical renewal and a shared legacy activity promote healing and closure."
           }
         ]
       },
       {
         dayOfWeek: "Day Six",
-        date: "March 20, 2024",
+        date: "April 6, 2024",
         location: "Departure Day",
         activities: [
           {
@@ -163,8 +162,6 @@ export const load: PageServerLoad = async ({ params }) => {
       }
     ]
   };
+</script>
 
-  return {
-    itinerary: itineraryData
-  };
-}; 
+<TravelItinerary {...itineraryData} /> 

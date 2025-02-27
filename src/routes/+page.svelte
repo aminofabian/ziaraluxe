@@ -26,26 +26,74 @@
   <!-- Hero Section with Video Background -->
   <div class="relative h-screen">
     <VideoBackground videoSrc="https://streamable.com/e/q8y4b1" />
-    <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20 z-10"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/50 z-10"></div>
     <HeroSection />
   </div>
 </div>
 
 <!-- Main Content Sections -->
-<FeaturesSection />
-<ToursSection />
-<TravelPackagesSection />
-<DiscoverSection />
-<DestinationsSection />
-<FAQSection />
-<TestimonialsSection />
-<NewsletterSection />
-<InstagramSection />
-<Footer />
+<div class="bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+  <div class="absolute inset-0 bg-[url('/images/tips/destinations/athens-315833_1920.jpg')] opacity-5 bg-cover bg-center"></div>
+  <FeaturesSection />
+</div>
+
+<div class="bg-white relative overflow-hidden">
+  <div class="absolute inset-0 bg-[url('/images/tips/destinations/france-7370939_1920.jpg')] opacity-5 bg-cover bg-fixed bg-center"></div>
+  <ToursSection />
+</div>
+
+<div class="bg-gray-50 relative overflow-hidden">
+  <div class="absolute inset-0 bg-[url('/images/tips/destinations/boat-7767575_1920.jpg')] opacity-5 bg-cover bg-center"></div>
+  <TravelPackagesSection />
+</div>
+
+<div class="bg-white relative overflow-hidden">
+  <div class="absolute inset-0 bg-[url('/images/tips/destinations/camping-7947055_1920.jpg')] opacity-5 bg-cover bg-fixed bg-center"></div>
+  <div class="absolute inset-0 bg-[url('/images/pattern.png')] opacity-5"></div>
+  <DiscoverSection />
+</div>
+
+<div class="bg-gray-50 relative overflow-hidden">
+  <div class="absolute inset-0 bg-[url('/images/tips/destinations/gran-canaria-4360002_1920.jpg')] opacity-5 bg-cover bg-center"></div>
+  <DestinationsSection />
+</div>
+
+<div class="bg-white relative overflow-hidden">
+  <div class="absolute inset-0 bg-[url('/images/tips/destinations/women-5534478_1920.jpg')] opacity-5 bg-cover bg-fixed bg-center"></div>
+  <div class="absolute inset-0 bg-gradient-to-br from-gray-50/50 to-transparent"></div>
+  <FAQSection />
+</div>
+
+<div class="bg-gray-50 relative overflow-hidden">
+  <div class="absolute inset-0 bg-[url('/images/tips/destinations/roe-deer-9394840_1920.jpg')] opacity-5 bg-cover bg-center"></div>
+  <TestimonialsSection />
+</div>
+
+<div class="bg-[#9F8054] text-white relative overflow-hidden">
+  <div class="absolute inset-0 bg-[url('/images/tips/destinations/bird-7237037_1920.jpg')] opacity-20 bg-cover bg-fixed bg-center"></div>
+  <div class="absolute inset-0 bg-[url('/images/pattern.png')] opacity-10"></div>
+  <div class="absolute inset-0 bg-gradient-to-br from-[#9F8054]/90 to-[#9F8054]/70"></div>
+  <NewsletterSection />
+</div>
+
+<div class="bg-white relative overflow-hidden">
+  <div class="absolute inset-0 bg-[url('/images/tips/destinations/gran-canaria-1684745_1280.jpg')] opacity-5 bg-cover bg-center"></div>
+  <InstagramSection />
+</div>
+
+<div class="relative">
+  <div class="absolute inset-0 bg-gradient-to-b from-white to-gray-50"></div>
+  <Footer />
+</div>
 <WhatsAppChat />
 
 <style>
   :global(body) {
-    background-color: var(--color-primary, #9F8054);
+    background-color: white;
+  }
+
+  /* Add smooth parallax effect */
+  .bg-fixed {
+    background-attachment: fixed;
   }
 </style>
