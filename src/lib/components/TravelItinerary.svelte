@@ -89,11 +89,11 @@
     'Franschhoek Village': '/images/tips/destinations/france-7370939_1920.jpg',
     'Camelot Spa': '/images/tips/destinations/boat-7767575_1920.jpg',
     'Departure Day': '/images/tips/destinations/camping-7947055_1920.jpg',
-    'Changi Airport, Singapore': '/images/tips/destinations/singapore-changi.jpg',
-    'Marina Bay Sands, Singapore': '/images/tips/destinations/marina-bay-sands.jpg',
-    'Block71, Singapore': '/images/tips/destinations/block71.jpg',
-    'Gardens By The Bay': '/images/tips/destinations/gardens-by-the-bay.jpg',
-    'Singapore Management University': '/images/tips/destinations/smu-campus.jpg'
+    'Changi Airport, Singapore': '/images/singapore/singapore-airlines-4675695_640.jpg',
+    'Marina Bay Sands, Singapore': '/images/singapore/skyline-4012151_640.jpg',
+    'Block71, Singapore': '/images/singapore/singapore-2471492_640.jpg',
+    'Gardens By The Bay': '/images/singapore/singapore-5653556_640.jpg',
+    'Singapore Management University': '/images/singapore/singapore-1234646_640.jpg'
   };
 
   function getLocationImage(location: string): string {
@@ -132,14 +132,15 @@
   <!-- Booking Form Modal -->
   {#if showBookingForm}
     <div 
-      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-      on:click={() => showBookingForm = false}
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 w-full border-0"
       transition:fade
     >
-      <div 
+      <button 
         class="bg-white rounded-2xl p-8 max-w-lg w-full shadow-2xl"
         on:click|stopPropagation
-        transition:scale
+        on:keydown|stopPropagation={(e) => e.key === 'Escape' && (showBookingForm = false)}
+        role="dialog"
+        aria-modal="true"
       >
         <h3 class="text-2xl font-bold text-[#b05535] mb-6">Book Your AgTech Journey</h3>
         <form class="space-y-4">
@@ -171,7 +172,7 @@
             Submit Booking Request
           </button>
         </form>
-      </div>
+      </button>
     </div>
   {/if}
 
