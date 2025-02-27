@@ -219,20 +219,20 @@
     </div>
 
     <!-- Quick Navigation -->
-    <div class="mb-8 overflow-x-auto">
-      <div class="flex space-x-4 min-w-max p-2">
+    <div class="mb-8 -mx-4 px-4 md:mx-0">
+      <div class="grid grid-cols-2 md:flex md:flex-wrap gap-3 py-4">
         <button 
-          class="px-6 py-3 rounded-lg transition-all duration-300 {selectedDay === null ? 'bg-[#b05535] text-white shadow-lg' : 'bg-[#b05535]/10 text-[#b05535] hover:bg-[#b05535]/20'}"
+          class="col-span-2 md:col-span-1 h-14 md:h-12 px-4 rounded-xl transition-all duration-300 text-center flex items-center justify-center {selectedDay === null ? 'bg-[#b05535] text-white shadow-lg' : 'bg-white text-[#b05535] hover:bg-[#b05535]/5 border-2 border-[#b05535] shadow-sm'}"
           on:click={() => filterDays(null)}
         >
-          All Days
+          <span class="font-semibold text-base">All Days</span>
         </button>
         {#each days as day, i}
           <button 
-            class="px-6 py-3 rounded-lg transition-all duration-300 {selectedDay === i ? 'bg-[#b05535] text-white shadow-lg' : 'bg-[#b05535]/10 text-[#b05535] hover:bg-[#b05535]/20'}"
+            class="h-14 md:h-12 px-4 rounded-xl transition-all duration-300 text-center flex items-center justify-center {selectedDay === i ? 'bg-[#b05535] text-white shadow-lg' : 'bg-white text-[#b05535] hover:bg-[#b05535]/5 border-2 border-[#b05535] shadow-sm'}"
             on:click={() => filterDays(i)}
           >
-            {day.dayOfWeek}
+            <span class="font-semibold text-base">Day {i + 1}</span>
           </button>
         {/each}
       </div>
@@ -368,5 +368,14 @@
     .page-break-after {
       page-break-after: always;
     }
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
   }
 </style> 
