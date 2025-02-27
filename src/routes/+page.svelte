@@ -46,6 +46,6 @@
 
 <style>
   :global(body) {
-    @apply bg-primary;
+    background-color: var(--color-primary, #9F8054);
   }
 </style>

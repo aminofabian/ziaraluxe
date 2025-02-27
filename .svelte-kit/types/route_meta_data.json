@@ -1,3 +1,6 @@
 {
-	"/": []
+	"/": [],
+	"/itineraries/[slug]": [
+		"src/routes/itineraries/[slug]/+page.server.ts"
+	]
 }
