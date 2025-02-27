@@ -13,6 +13,7 @@
   import InstagramSection from '$lib/components/InstagramSection.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import WhatsAppChat from '$lib/components/WhatsAppChat.svelte';
+  import TravelPackagesSection from '$lib/components/TravelPackagesSection.svelte';
 </script>
 
 <div class="relative min-h-screen">
@@ -33,6 +34,7 @@
 <!-- Main Content Sections -->
 <FeaturesSection />
 <ToursSection />
+<TravelPackagesSection />
 <DiscoverSection />
 <DestinationsSection />
 <FAQSection />
