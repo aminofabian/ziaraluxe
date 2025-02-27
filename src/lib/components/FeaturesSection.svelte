@@ -4,27 +4,39 @@
   export let features = [
     {
       image: '/images/tips/8F7A1154-2-scaled.jpg',
-      icon: '💳',
-      title: 'Payment plans',
-      description: 'Our trips are designed to be affordable and convenient. You have the option to select a flexible payment schedule, allowing you to pay for your trip either in full or through monthly installments!',
+      icon: '🚀',
+      title: 'Entrepreneurs & Business Owners',
+      description: 'Looking to expand into new markets, meet potential partners, and gain insights into global industries.',
     },
     {
       image: '/images/tips/alex-azabache-hz4tKDvQHoo-unsplash-scaled.jpg',
-      icon: '🌟',
-      title: 'Curated experiences',
-      description: 'Each trip is meticulously planned by our team of travel experts! We curate experiences in destinations we deeply understand, ensuring meaningful and well-crafted experiences tailored specifically for you.',
+      icon: '👔',
+      title: 'Corporate Executives & Decision Makers',
+      description: 'Seeking industry-specific benchmarking, strategic collaborations, and leadership insights.',
     },
     {
       image: '/images/tips/hisham-zayadnh-hP9QlSnyX1A-unsplash-scaled.jpg',
-      icon: '👥',
-      title: 'A travel community',
-      description: 'Ditch the flaky group chats! Our group trips bring likeminded professionals from all over the world. We are all about venturing beyond your comfort zone and forming new friendships.',
+      icon: '📈',
+      title: 'Investors & Venture Capitalists',
+      description: 'Exploring high-value business ventures, start-up ecosystems, and emerging industries worldwide.',
     },
     {
       image: '/images/tips/daniele-colucci-MchEBdctI24-unsplash-scaled.jpg',
+      icon: '⚖️',
+      title: 'Policymakers & Government Officials',
+      description: 'Studying economic models, trade policies, and regulatory frameworks from leading nations.',
+    },
+    {
+      image: '/images/tips/8F7A1511.jpg',
+      icon: '🔬',
+      title: 'Industry Experts & Researchers',
+      description: 'Gaining hands-on experience in specialized fields, from healthcare innovations to agricultural advancements.',
+    },
+    {
+      image: '/images/tips/130644843.jpg',
       icon: '🤝',
-      title: 'Giving back',
-      description: 'In addition to collaborating with locals and small businesses in each destination, a portion of the proceeds from our trips goes towards enriching the local communities in the countries you explore.',
+      title: 'Business Councils & Trade Associations',
+      description: 'Organizing exclusive industry missions, sector-based learning tours, and cross-border networking.',
     }
   ];
 
@@ -72,7 +84,7 @@
   <div class="container mx-auto max-w-7xl relative z-10">
     <!-- Section Title -->
     <div class="text-center mb-20">
-      <h2 class="font-sans text-5xl font-bold mb-4 text-[#b05535]">Why Travel With Us</h2>
+      <h2 class="font-sans text-5xl font-bold mb-4 text-[#b05535]">WHO IS THIS FOR?</h2>
       <p class="text-lg text-gray-600 font-sans">Experience luxury travel redefined</p>
     </div>
 
@@ -85,7 +97,7 @@
 
       <!-- Left Features -->
       <div class="space-y-16">
-        <!-- Payment Plans -->
+        <!-- First Feature -->
         <div class="group text-center">
           <div class="mb-6 relative">
             <div class="w-20 h-20 mx-auto bg-[#e3a457] rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
@@ -96,15 +108,15 @@
           <p class="text-gray-600 font-sans">{features[0].description}</p>
         </div>
         
-        <!-- Travel Community -->
+        <!-- Second Feature -->
         <div class="group text-center">
           <div class="mb-6 relative">
             <div class="w-20 h-20 mx-auto bg-[#e3a457] rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-              <i class="text-3xl text-white">{features[2].icon}</i>
+              <i class="text-3xl text-white">{features[1].icon}</i>
             </div>
           </div>
-          <h3 class="font-sans text-2xl font-semibold mb-4 text-[#b05535]">{features[2].title}</h3>
-          <p class="text-gray-600 font-sans">{features[2].description}</p>
+          <h3 class="font-sans text-2xl font-semibold mb-4 text-[#b05535]">{features[1].title}</h3>
+          <p class="text-gray-600 font-sans">{features[1].description}</p>
         </div>
       </div>
 
@@ -123,18 +135,18 @@
 
       <!-- Right Features -->
       <div class="space-y-16">
-        <!-- Curated Experiences -->
+        <!-- Third Feature -->
         <div class="group text-center">
           <div class="mb-6 relative">
             <div class="w-20 h-20 mx-auto bg-[#e3a457] rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-              <i class="text-3xl text-white">{features[1].icon}</i>
+              <i class="text-3xl text-white">{features[2].icon}</i>
             </div>
           </div>
-          <h3 class="font-sans text-2xl font-semibold mb-4 text-[#b05535]">{features[1].title}</h3>
-          <p class="text-gray-600 font-sans">{features[1].description}</p>
+          <h3 class="font-sans text-2xl font-semibold mb-4 text-[#b05535]">{features[2].title}</h3>
+          <p class="text-gray-600 font-sans">{features[2].description}</p>
         </div>
 
-        <!-- Giving Back -->
+        <!-- Fourth Feature -->
         <div class="group text-center">
           <div class="mb-6 relative">
             <div class="w-20 h-20 mx-auto bg-[#e3a457] rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
@@ -144,6 +156,31 @@
           <h3 class="font-sans text-2xl font-semibold mb-4 text-[#b05535]">{features[3].title}</h3>
           <p class="text-gray-600 font-sans">{features[3].description}</p>
         </div>
+      </div>
+    </div>
+
+    <!-- Additional Features Row -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
+      <!-- Fifth Feature -->
+      <div class="group text-center">
+        <div class="mb-6 relative">
+          <div class="w-20 h-20 mx-auto bg-[#e3a457] rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+            <i class="text-3xl text-white">{features[4].icon}</i>
+          </div>
+        </div>
+        <h3 class="font-sans text-2xl font-semibold mb-4 text-[#b05535]">{features[4].title}</h3>
+        <p class="text-gray-600 font-sans">{features[4].description}</p>
+      </div>
+
+      <!-- Sixth Feature -->
+      <div class="group text-center">
+        <div class="mb-6 relative">
+          <div class="w-20 h-20 mx-auto bg-[#e3a457] rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+            <i class="text-3xl text-white">{features[5].icon}</i>
+          </div>
+        </div>
+        <h3 class="font-sans text-2xl font-semibold mb-4 text-[#b05535]">{features[5].title}</h3>
+        <p class="text-gray-600 font-sans">{features[5].description}</p>
       </div>
     </div>
   </div>
@@ -205,3 +242,4 @@
     font-family: 'Plus Jakarta Sans', sans-serif;
   }
 </style>
+
