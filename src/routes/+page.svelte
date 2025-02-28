@@ -14,6 +14,7 @@
   import Footer from '$lib/components/Footer.svelte';
   import WhatsAppChat from '$lib/components/WhatsAppChat.svelte';
   import TravelPackagesSection from '$lib/components/TravelPackagesSection.svelte';
+  import BusinessBeyond from '$lib/components/BusinessBeyond.svelte';
 </script>
 
 <div class="relative min-h-screen">
@@ -29,6 +30,9 @@
     <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/50 z-10"></div>
     <HeroSection />
   </div>
+
+  <!-- Business Beyond Section -->
+  <BusinessBeyond />
 </div>
 
 <!-- Main Content Sections -->
