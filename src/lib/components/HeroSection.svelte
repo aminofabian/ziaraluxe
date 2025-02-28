@@ -29,7 +29,7 @@
     <!-- Content grid -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 items-end">
       <div class="text-left backdrop-blur-sm bg-black/5 p-4 md:p-8 rounded-xl">
-        <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl xl:text-7xl mb-4 md:mb-6 leading-tight">
+        <h1 class="font-serif text-4xl sm:text-5xl md:text-5xl xl:text-6xl mb-4 md:mb-6 leading-tight">
           <span class="block text-white">Discover</span>
           <span class="block text-[#e3a457] font-bold mt-1 md:mt-2">Extraordinary</span>
           <span class="block text-white mt-1 md:mt-2">Experiences</span>
