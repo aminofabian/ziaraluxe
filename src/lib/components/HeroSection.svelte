@@ -35,8 +35,7 @@
           <span class="block text-white mt-1 md:mt-2">Experiences</span>
         </h1>
         <p class="text-lg sm:text-xl md:text-2xl xl:text-3xl mb-6 md:mb-12 text-white leading-relaxed max-w-2xl">
-          At Ziara Luxe, every destination tells a story and Every journey has a
-purpose.        </p>
+          At Ziara Luxe, every destination tells a story and every journey has a purpose.      </p>
   
         <!-- CTA Buttons -->
         <div class="flex flex-col sm:flex-row items-stretch sm:items-start gap-4 md:gap-6">
