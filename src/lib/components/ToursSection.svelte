@@ -9,10 +9,15 @@
       departure: "Cairo, Egypt",
       arrival: "Tel Aviv, Israel",
       stops: 6,
-      originalPrice: 8999,
-      discountedPrice: 7999,
-      date: "20 May 2025",
+      duration: "6 Days",
       promotion: "Early Bird: Complimentary Desert Agriculture Workshop",
+      businessSector: "AgriTech & Sustainable Farming",
+      corporateBenefits: [
+        "Direct meetings with AgTech CEOs",
+        "Access to research facilities",
+        "Industry white papers & reports"
+      ],
+      networkingEvents: 4,
       itinerary: [
         "Cairo Desert Research Center Visit",
         "Israeli AgTech Startup Networking",
@@ -36,10 +41,15 @@
       departure: "Changi Airport, Singapore",
       arrival: "Changi Airport, Singapore",
       stops: 8,
-      originalPrice: 9999,
-      discountedPrice: 8499,
-      date: "10 Jun 2025",
+      duration: "6 Days",
       promotion: "Executive Package: Including All Business Networking Events",
+      businessSector: "Finance & Corporate Innovation",
+      corporateBenefits: [
+        "SGX trading floor access pass",
+        "Corporate innovation playbook",
+        "Singapore business network membership"
+      ],
+      networkingEvents: 6,
       itinerary: [
         "Singapore Exchange (SGX) Visit",
         "Block71 Startup Ecosystem Tour",
@@ -65,8 +75,8 @@
   
   <div class="container mx-auto max-w-7xl">
     <div class="text-center mb-16 relative">
-      <h2 class="font-sans text-5xl font-bold mb-4 text-[#b05535]">Specialized Business Tours</h2>
-      <p class="text-xl text-gray-600 font-sans">Discover innovative business practices and technologies across the globe</p>
+      <h2 class="font-sans text-5xl font-bold mb-4 text-[#b05535]">Executive Business Tours</h2>
+      <p class="text-xl text-gray-600 font-sans">Exclusive corporate travel experiences for industry leaders and professionals</p>
     </div>
 
     <div class="space-y-12">
@@ -80,7 +90,7 @@
               <img src={tour.image} alt={tour.title} class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" />
               <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div class="absolute top-4 left-4 bg-[#b05535] text-white px-6 py-2 rounded-full text-sm font-semibold backdrop-blur-sm">
-                {tour.nights} NIGHTS
+                {tour.businessSector}
               </div>
               <div class="absolute bottom-4 left-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0">
                 {#each tour.highlights as highlight}
@@ -97,21 +107,14 @@
                   <h3 class="text-3xl font-bold text-[#b05535] mb-2">{tour.title}</h3>
                   <p class="text-lg text-gray-600">{tour.destination}</p>
                 </div>
-                <div class="text-right">
-                  <div class="text-gray-400 line-through">£{tour.originalPrice}</div>
-                  <div class="text-3xl font-bold text-[#b05535]">
-                    £{tour.discountedPrice}
-                  </div>
-                  <div class="text-sm text-gray-500">per person</div>
-                </div>
               </div>
 
               <div class="grid grid-cols-2 gap-6 mb-8">
                 {#each [
                   { label: 'Departure', value: tour.departure, icon: '✈️' },
-                  { label: 'Arrival', value: tour.arrival, icon: '🏁' },
-                  { label: 'Date', value: tour.date, icon: '📅' },
-                  { label: 'Stops', value: `${tour.stops} destinations`, icon: '🗺️' }
+                  { label: 'Duration', value: tour.duration, icon: '⏱️' },
+                  { label: 'Networking Events', value: `${tour.networkingEvents} sessions`, icon: '🤝' },
+                  { label: 'Site Visits', value: `${tour.stops} locations`, icon: '🏢' }
                 ] as detail}
                   <div class="group/item">
                     <div class="text-sm text-gray-500 flex items-center gap-2">
@@ -123,12 +126,23 @@
                 {/each}
               </div>
 
+              <div class="mb-6">
+                <h4 class="text-sm uppercase text-gray-500 mb-3">Corporate Benefits</h4>
+                <div class="flex flex-wrap gap-2">
+                  {#each tour.corporateBenefits as benefit}
+                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
+                      {benefit}
+                    </span>
+                  {/each}
+                </div>
+              </div>
+
               <div class="flex items-center justify-between flex-wrap gap-4">
                 <div class="bg-[#b05535]/10 text-[#b05535] px-4 py-2 rounded-full text-sm">
                   {tour.promotion}
                 </div>
                 <button class="relative overflow-hidden bg-[#b05535] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#4a5720] transition-colors duration-300">
-                  <span class="relative z-10">Book Tour</span>
+                  <span class="relative z-10">Request Details</span>
                 </button>
               </div>
 

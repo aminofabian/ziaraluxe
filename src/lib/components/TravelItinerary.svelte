@@ -134,11 +134,11 @@
     <div 
       class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 w-full border-0"
       transition:fade
+      on:click={() => showBookingForm = false}
     >
-      <button 
+      <div 
         class="bg-white rounded-2xl p-8 max-w-lg w-full shadow-2xl"
         on:click|stopPropagation
-        on:keydown|stopPropagation={(e) => e.key === 'Escape' && (showBookingForm = false)}
         role="dialog"
         aria-modal="true"
       >
@@ -172,7 +172,7 @@
             Submit Booking Request
           </button>
         </form>
-      </button>
+      </div>
     </div>
   {/if}
 
