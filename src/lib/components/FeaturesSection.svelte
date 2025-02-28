@@ -210,7 +210,7 @@
     position: absolute;
     inset: -40px;
     border: 2px dashed #b05535;
-    border-radius: 50%;
+    border-radius: 60%;
     opacity: 0.3;
   }
 
