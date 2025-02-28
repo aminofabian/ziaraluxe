@@ -63,7 +63,7 @@
   ];
 </script>
 
-<section class="relative py-16 sm:py-32 px-4 overflow-hidden bg-gradient-to-b from-white to-[#faf7f5]">
+<section class="relative py-6 xs:py-8 sm:py-16 lg:py-32 px-2 xs:px-3 sm:px-4 overflow-hidden bg-gradient-to-b from-white to-[#faf7f5]">
   <!-- Premium background effects -->
   <div class="absolute inset-0">
     <div class="absolute inset-0 opacity-10 bg-[url('/images/noise.png')] mix-blend-overlay"></div>
@@ -72,17 +72,17 @@
 
   <div class="container mx-auto max-w-7xl relative z-10">
     <!-- Premium Section Title -->
-    <div class="text-center mb-12 sm:mb-24">
+    <div class="text-center mb-4 xs:mb-6 sm:mb-12 lg:mb-24 px-2 xs:px-4">
       <div class="inline-block">
-        <span class="text-[#b05535] text-xs sm:text-sm font-medium tracking-wider uppercase mb-2 sm:mb-4 block">Exclusive Network</span>
-        <h2 class="text-[#2c1810] text-3xl sm:text-5xl font-bold mb-4 sm:mb-6 tracking-tight">WHO IS THIS FOR?</h2>
-        <p class="text-[#2c1810]/60 text-base sm:text-lg font-light">Experience luxury travel redefined</p>
-        <div class="mt-4 h-px w-24 mx-auto bg-gradient-to-r from-transparent via-[#b05535] to-transparent"></div>
+        <span class="text-[#b05535] text-[10px] xs:text-xs sm:text-sm font-medium tracking-wider uppercase mb-1 xs:mb-2 sm:mb-4 block">Exclusive Network</span>
+        <h2 class="text-[#2c1810] text-lg xs:text-xl sm:text-3xl lg:text-5xl font-bold mb-1.5 xs:mb-2 sm:mb-4 lg:mb-6 tracking-tight">WHO IS THIS FOR?</h2>
+        <p class="text-[#2c1810]/60 text-[11px] xs:text-xs sm:text-base lg:text-lg font-light max-w-[260px] xs:max-w-[280px] sm:max-w-xl mx-auto">Experience luxury travel redefined</p>
+        <div class="mt-2 xs:mt-3 sm:mt-4 h-px w-12 xs:w-16 sm:w-24 mx-auto bg-gradient-to-r from-transparent via-[#b05535] to-transparent"></div>
       </div>
     </div>
 
     <!-- Lifecycle Circle -->
-    <div class="relative max-w-7xl mx-auto min-h-[500px] sm:min-h-[600px] h-auto lg:h-[1000px] flex items-start sm:items-center justify-center py-12 sm:py-20 lg:py-0">
+    <div class="relative max-w-7xl mx-auto min-h-[280px] xs:min-h-[320px] sm:min-h-[500px] md:min-h-[600px] h-auto lg:h-[1000px] flex items-start sm:items-center justify-center py-2 xs:py-4 sm:py-12 lg:py-0">
       <!-- Floating Background Images -->
       {#each floatingImages.slice(0, 3) as image, i}
         <div 
@@ -101,7 +101,7 @@
         <div class="absolute inset-0 orbital-particles hidden lg:block"></div>
 
         <!-- Center Image -->
-        <div class="absolute top-0 lg:top-1/2 left-1/2 -translate-x-1/2 lg:-translate-y-1/2 w-32 sm:w-48 md:w-72 lg:w-96 h-32 sm:h-48 md:h-72 lg:h-96 z-10">
+        <div class="absolute top-0 lg:top-1/2 left-1/2 -translate-x-1/2 lg:-translate-y-1/2 w-16 xs:w-20 sm:w-48 md:w-72 lg:w-96 h-16 xs:h-20 sm:h-48 md:h-72 lg:h-96 z-10">
           <div class="relative w-full h-full">
             <!-- Pulsing Rings -->
             <div class="absolute inset-[-20px] pulse-ring hidden lg:block"></div>
@@ -122,33 +122,33 @@
         <div class="absolute inset-0 sparkle-lines hidden lg:block"></div>
 
         <!-- Features List/Circle -->
-        <div class="flex flex-col lg:block space-y-6 sm:space-y-8 lg:space-y-0 mt-40 sm:mt-64 md:mt-96 lg:mt-0 px-4 lg:px-0">
+        <div class="flex flex-col lg:block space-y-2.5 xs:space-y-3 sm:space-y-6 lg:space-y-0 mt-20 xs:mt-24 sm:mt-64 md:mt-96 lg:mt-0 px-2 xs:px-4 sm:px-6 lg:px-0 w-full">
           {#each features as feature, i}
             <div 
-              class="relative lg:absolute lifecycle-item group"
+              class="relative lg:absolute lifecycle-item group w-full"
               style="--index: {i}; --total: {features.length};"
             >
-              <div class="relative">
+              <div class="relative w-full">
                 <!-- Connection Line -->
                 <div class="absolute inset-0 connection-line hidden lg:block"></div>
                 
                 <!-- Feature Content -->
-                <div class="relative bg-white/90 backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-xl hover:bg-white group-hover:ring-2 ring-[#b05535]/20 w-full max-w-[280px] xs:max-w-[320px] sm:max-w-sm mx-auto lg:mx-0">
-                  <div class="lifecycle-icon-frame mb-3 sm:mb-4 group-hover:animate-bounce-subtle">
-                    <span class="text-lg sm:text-xl">{feature.icon}</span>
+                <div class="relative bg-white/90 backdrop-blur-sm rounded-lg xs:rounded-xl sm:rounded-2xl p-2 xs:p-2.5 sm:p-6 shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-xl hover:bg-white group-hover:ring-2 ring-[#b05535]/20 w-full max-w-[220px] xs:max-w-[240px] sm:max-w-[320px] lg:max-w-[280px] mx-auto">
+                  <div class="lifecycle-icon-frame w-5 h-5 xs:w-6 xs:h-6 sm:w-12 sm:h-12 mb-1 xs:mb-1.5 sm:mb-4 group-hover:animate-bounce-subtle">
+                    <span class="text-xs xs:text-sm sm:text-xl">{feature.icon}</span>
                   </div>
-                  <h3 class="text-[#2c1810] text-sm sm:text-base lg:text-lg font-medium mb-2 sm:mb-3 group-hover:text-[#b05535] transition-colors duration-300 line-clamp-2">
+                  <h3 class="text-[#2c1810] text-[10px] xs:text-xs sm:text-base lg:text-lg font-medium mb-0.5 xs:mb-1 sm:mb-3 group-hover:text-[#b05535] transition-colors duration-300 line-clamp-2 break-words">
                     {feature.title}
                   </h3>
-                  <p class="text-[#2c1810]/60 text-xs sm:text-sm leading-relaxed line-clamp-3">
+                  <p class="text-[#2c1810]/60 text-[9px] xs:text-[10px] sm:text-sm leading-relaxed line-clamp-3 break-words">
                     {feature.description}
                   </p>
                   <!-- Hover Indicator -->
-                  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-gradient-to-r from-transparent via-[#b05535] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 xs:w-10 sm:w-12 h-0.5 xs:h-1 bg-gradient-to-r from-transparent via-[#b05535] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
 
                 <!-- Feature Image Preview -->
-                <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-28 h-28 lifecycle-image opacity-0 group-hover:opacity-100 transition-all duration-500 hidden lg:block">
+                <div class="absolute -top-16 xs:-top-20 left-1/2 -translate-x-1/2 w-20 xs:w-24 sm:w-28 h-20 xs:h-24 sm:h-28 lifecycle-image opacity-0 group-hover:opacity-100 transition-all duration-500 hidden lg:block">
                   <div class="w-full h-full rounded-full overflow-hidden shadow-xl relative">
                     <div class="absolute inset-0 bg-gradient-to-br from-[#b05535] to-[#e3a457] animate-spin-slow"></div>
                     <div class="absolute inset-0.5 rounded-full overflow-hidden">
@@ -278,22 +278,22 @@
   .floating-image:nth-child(1) {
     top: 8%;
     left: 2%;
-    width: 300px;
-    height: 400px;
+    width: 240px;
+    height: 320px;
   }
 
   .floating-image:nth-child(2) {
     top: 12%;
     right: 2%;
-    width: 320px;
-    height: 240px;
+    width: 260px;
+    height: 200px;
   }
 
   .floating-image:nth-child(3) {
     bottom: 12%;
     left: 5%;
-    width: 280px;
-    height: 350px;
+    width: 220px;
+    height: 280px;
   }
 
   @keyframes float {
@@ -433,22 +433,68 @@
       transform: none !important;
       opacity: 1;
       animation: fadeInMobile 0.5s ease-out forwards;
-      animation-delay: calc(var(--index) * 0.2s);
+      animation-delay: calc(var(--index) * 0.1s);
       margin-left: auto;
       margin-right: auto;
       width: 100%;
-      max-width: 280px;
+      display: flex;
+      justify-content: center;
     }
 
-    @keyframes fadeInMobile {
-      from {
-        opacity: 0;
-        transform: translateY(20px) !important;
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) !important;
-      }
+    .lifecycle-item > div {
+      width: 100%;
+      max-width: min(100%, var(--max-card-width, 320px));
+    }
+
+    .lifecycle-lines,
+    .sparkle-lines,
+    .orbital-particles {
+      opacity: 0.03;
+      transform: scale(0.7);
+    }
+
+    .connection-line {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .lifecycle-icon-frame {
+      margin: 0 auto 0.25rem;
+    }
+
+    .lifecycle-lines,
+    .sparkle-lines,
+    .orbital-particles {
+      transform: scale(0.5);
+      opacity: 0.02;
+    }
+
+    .lifecycle-item {
+      animation-delay: calc(var(--index) * 0.08s);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .lifecycle-lines,
+    .sparkle-lines,
+    .orbital-particles,
+    .pulse-ring {
+      display: none;
+    }
+
+    .lifecycle-item > div {
+      --max-card-width: 220px;
+    }
+
+    .lifecycle-item {
+      animation-delay: calc(var(--index) * 0.05s);
+    }
+  }
+
+  @media (max-width: 360px) {
+    .lifecycle-item > div {
+      --max-card-width: 200px;
     }
   }
 
@@ -467,21 +513,15 @@
   }
 
   @media (max-width: 768px) {
-    .floating-image:nth-child(1) {
-      display: none;
-    }
-    .floating-image:nth-child(2) {
-      display: none;
-    }
-    .floating-image:nth-child(3) {
+    .floating-image {
       display: none;
     }
   }
 
-  @keyframes fadeInUp {
+  @keyframes fadeInMobile {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(10px);
     }
     to {
       opacity: 1;
