@@ -26,7 +26,7 @@
 
   <!-- Hero Section with Video Background -->
   <div class="relative h-screen">
-    <VideoBackground videoSrc="https://streamable.com/e/q8y4b1" />
+    <VideoBackground videoSrc="/videos/hero.mp4" />
     <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/50 z-10"></div>
     <HeroSection />
   </div>
