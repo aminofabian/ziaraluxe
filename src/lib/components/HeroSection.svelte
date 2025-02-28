@@ -30,12 +30,12 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 items-end">
       <div class="text-left backdrop-blur-sm bg-black/5 p-4 md:p-8 rounded-xl">
         <h1 class="font-serif text-4xl sm:text-5xl md:text-5xl xl:text-6xl mb-4 md:mb-6 leading-tight">
-          <span class="block text-white">Discover</span>
-          <span class="block text-[#e3a457] font-bold mt-1 md:mt-2">Extraordinary</span>
+          <span class="block text-white">Premium</span>
+          <span class="block text-[#e3a457] font-bold mt-1 md:mt-2">Travel</span>
           <span class="block text-white mt-1 md:mt-2">Experiences</span>
         </h1>
         <p class="text-lg sm:text-xl md:text-2xl xl:text-3xl mb-6 md:mb-12 text-white leading-relaxed max-w-2xl">
-          At Ziara Luxe, every destination tells a story and every journey has a purpose.      </p>
+          Executive business trips, purpose-driven tourism, and specialized group travel experiences. </p>
   
         <!-- CTA Buttons -->
         <div class="flex flex-col sm:flex-row items-stretch sm:items-start gap-4 md:gap-6">
