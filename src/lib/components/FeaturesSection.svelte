@@ -122,44 +122,69 @@
         <div class="absolute inset-0 sparkle-lines hidden lg:block"></div>
 
         <!-- Features List/Circle -->
-        <div class="flex flex-col lg:block space-y-2.5 xs:space-y-3 sm:space-y-6 lg:space-y-0 mt-20 xs:mt-24 sm:mt-64 md:mt-96 lg:mt-0 px-2 xs:px-4 sm:px-6 lg:px-0 w-full">
-          {#each features as feature, i}
-            <div 
-              class="relative lg:absolute lifecycle-item group w-full"
-              style="--index: {i}; --total: {features.length};"
-            >
-              <div class="relative w-full">
-                <!-- Connection Line -->
-                <div class="absolute inset-0 connection-line hidden lg:block"></div>
-                
-                <!-- Feature Content -->
-                <div class="relative bg-white/90 backdrop-blur-sm rounded-lg xs:rounded-xl sm:rounded-2xl p-2 xs:p-2.5 sm:p-6 shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-xl hover:bg-white group-hover:ring-2 ring-[#b05535]/20 w-full max-w-[220px] xs:max-w-[240px] sm:max-w-[320px] lg:max-w-[280px] mx-auto">
-                  <div class="lifecycle-icon-frame w-5 h-5 xs:w-6 xs:h-6 sm:w-12 sm:h-12 mb-1 xs:mb-1.5 sm:mb-4 group-hover:animate-bounce-subtle">
-                    <span class="text-xs xs:text-sm sm:text-xl">{feature.icon}</span>
+        <div class="flex flex-col lg:block mt-16 xs:mt-20 sm:mt-64 md:mt-96 lg:mt-0 w-full">
+          <!-- Mobile/Tablet Layout -->
+          <div class="flex flex-col items-center lg:hidden w-full px-4 sm:px-6">
+            {#each features as feature, i}
+              <div 
+                class="w-full max-w-[300px] mb-4 last:mb-0"
+                style="--index: {i}; --total: {features.length};"
+              >
+                <div class="bg-white rounded-xl p-4 shadow-md w-full">
+                  <div class="lifecycle-icon-frame w-12 h-12 mx-auto mb-3">
+                    <span class="text-base">{feature.icon}</span>
                   </div>
-                  <h3 class="text-[#2c1810] text-[10px] xs:text-xs sm:text-base lg:text-lg font-medium mb-0.5 xs:mb-1 sm:mb-3 group-hover:text-[#b05535] transition-colors duration-300 line-clamp-2 break-words">
+                  <h3 class="text-[#2c1810] text-base font-medium mb-2 text-center px-2">
                     {feature.title}
                   </h3>
-                  <p class="text-[#2c1810]/60 text-[9px] xs:text-[10px] sm:text-sm leading-relaxed line-clamp-3 break-words">
+                  <p class="text-[#2c1810]/60 text-sm leading-relaxed text-center px-2">
                     {feature.description}
                   </p>
-                  <!-- Hover Indicator -->
-                  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 xs:w-10 sm:w-12 h-0.5 xs:h-1 bg-gradient-to-r from-transparent via-[#b05535] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
+              </div>
+            {/each}
+          </div>
 
-                <!-- Feature Image Preview -->
-                <div class="absolute -top-16 xs:-top-20 left-1/2 -translate-x-1/2 w-20 xs:w-24 sm:w-28 h-20 xs:h-24 sm:h-28 lifecycle-image opacity-0 group-hover:opacity-100 transition-all duration-500 hidden lg:block">
-                  <div class="w-full h-full rounded-full overflow-hidden shadow-xl relative">
-                    <div class="absolute inset-0 bg-gradient-to-br from-[#b05535] to-[#e3a457] animate-spin-slow"></div>
-                    <div class="absolute inset-0.5 rounded-full overflow-hidden">
-                      <img src={feature.image} alt={feature.title} class="w-full h-full object-cover" />
-                      <div class="absolute inset-0 bg-gradient-to-br from-[#b05535]/10 to-[#e3a457]/10"></div>
+          <!-- Desktop Circle Layout -->
+          <div class="hidden lg:block">
+            {#each features as feature, i}
+              <div 
+                class="absolute lifecycle-item group"
+                style="--index: {i}; --total: {features.length};"
+              >
+                <div class="relative w-full">
+                  <!-- Connection Line -->
+                  <div class="absolute inset-0 connection-line"></div>
+                  
+                  <!-- Feature Content -->
+                  <div class="relative bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-xl hover:bg-white group-hover:ring-2 ring-[#b05535]/20 w-full max-w-[280px]">
+                    <div class="lifecycle-icon-frame w-12 h-12 mb-4 group-hover:animate-bounce-subtle">
+                      <span class="text-xl">{feature.icon}</span>
+                    </div>
+                    <h3 class="text-[#2c1810] text-lg font-medium mb-3 group-hover:text-[#b05535] transition-colors duration-300 line-clamp-2 break-words">
+                      {feature.title}
+                    </h3>
+                    <p class="text-[#2c1810]/60 text-sm leading-relaxed line-clamp-3 break-words">
+                      {feature.description}
+                    </p>
+                    <!-- Hover Indicator -->
+                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-gradient-to-r from-transparent via-[#b05535] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+
+                  <!-- Feature Image Preview -->
+                  <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-28 h-28 lifecycle-image opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    <div class="w-full h-full rounded-full overflow-hidden shadow-xl relative">
+                      <div class="absolute inset-0 bg-gradient-to-br from-[#b05535] to-[#e3a457] animate-spin-slow"></div>
+                      <div class="absolute inset-0.5 rounded-full overflow-hidden">
+                        <img src={feature.image} alt={feature.title} class="w-full h-full object-cover" />
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#b05535]/10 to-[#e3a457]/10"></div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          {/each}
+            {/each}
+          </div>
         </div>
       </div>
     </div>
@@ -433,27 +458,12 @@
       transform: none !important;
       opacity: 1;
       animation: fadeInMobile 0.5s ease-out forwards;
-      animation-delay: calc(var(--index) * 0.1s);
-      margin-left: auto;
-      margin-right: auto;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-
-    .lifecycle-item > div {
-      width: 100%;
-      max-width: min(100%, var(--max-card-width, 320px));
+      animation-delay: calc(var(--index) * 0.08s);
     }
 
     .lifecycle-lines,
     .sparkle-lines,
     .orbital-particles {
-      opacity: 0.03;
-      transform: scale(0.7);
-    }
-
-    .connection-line {
       display: none;
     }
   }
@@ -461,17 +471,6 @@
   @media (max-width: 640px) {
     .lifecycle-icon-frame {
       margin: 0 auto 0.25rem;
-    }
-
-    .lifecycle-lines,
-    .sparkle-lines,
-    .orbital-particles {
-      transform: scale(0.5);
-      opacity: 0.02;
-    }
-
-    .lifecycle-item {
-      animation-delay: calc(var(--index) * 0.08s);
     }
   }
 
@@ -481,20 +480,6 @@
     .orbital-particles,
     .pulse-ring {
       display: none;
-    }
-
-    .lifecycle-item > div {
-      --max-card-width: 220px;
-    }
-
-    .lifecycle-item {
-      animation-delay: calc(var(--index) * 0.05s);
-    }
-  }
-
-  @media (max-width: 360px) {
-    .lifecycle-item > div {
-      --max-card-width: 200px;
     }
   }
 
