@@ -28,20 +28,15 @@
   <div class="container mx-auto px-4">
     <!-- Content grid -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 items-end">
-      <div class="text-left backdrop-blur-sm bg-black/10 p-6 md:p-10 rounded-2xl shadow-2xl border border-white/10">
-        <h1 class="font-serif text-2xl sm:text-3xl md:text-4xl xl:text-5xl mb-6 md:mb-8 leading-tight">
-          <span class="block text-white font-light">Redefining Travel Through</span>
-          <span class="block text-[#e3a457] font-bold mt-2 md:mt-3">Luxury, Learning,</span>
-          <span class="block text-white font-light mt-2 md:mt-3">and Impact</span>
+      <div class="text-left backdrop-blur-sm bg-black/5 p-4 md:p-8 rounded-xl">
+        <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl xl:text-7xl mb-4 md:mb-6 leading-tight">
+          <span class="block text-white">Discover</span>
+          <span class="block text-[#e3a457] font-bold mt-1 md:mt-2">Extraordinary</span>
+          <span class="block text-white mt-1 md:mt-2">Experiences</span>
         </h1>
-        <p class="text-lg sm:text-xl md:text-2xl xl:text-3xl mb-8 md:mb-12 text-white/90 leading-relaxed max-w-2xl font-light">
-          At Ziara Luxe, every destination tells a story and every journey has a purpose.
-        </p>
-        <a href="#discover" class="inline-block px-8 py-3 bg-[#e3a457] text-black font-medium rounded-full transition-all duration-300 hover:bg-white hover:text-[#e3a457] text-lg">
-          Discover Our Journeys
-        </a>
-      </div>
-    </div>
+        <p class="text-lg sm:text-xl md:text-2xl xl:text-3xl mb-6 md:mb-12 text-white leading-relaxed max-w-2xl">
+          At Ziara Luxe, every destination tells a story and Every journey has a
+purpose.        </p>
   
         <!-- CTA Buttons -->
         <div class="flex flex-col sm:flex-row items-stretch sm:items-start gap-4 md:gap-6">
@@ -154,3 +149,5 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
