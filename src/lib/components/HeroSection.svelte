@@ -31,7 +31,7 @@
       <div class="text-left backdrop-blur-sm bg-black/5 p-4 md:p-8 rounded-xl">
         <h1 class="font-serif text-4xl sm:text-5xl md:text-5xl xl:text-6xl mb-4 md:mb-6 leading-tight">
           <span class="block text-white">Premium</span>
-          <span class="block text-[#e3a457] font-bold mt-1 md:mt-2">Travel</span>
+          <span class="block text-[#e3a457] font-bold mt-1 md:mt-3">Travel</span>
           <span class="block text-white mt-1 md:mt-2">Experiences</span>
         </h1>
         <p class="text-lg sm:text-xl md:text-2xl xl:text-3xl mb-6 md:mb-12 text-white leading-relaxed max-w-2xl">
